@@ -83,21 +83,6 @@ public class JsonModule extends SimpleModule {
     }
   }
 
-  static class OperationSerializer extends StdSerializer<Operation> {
-
-    OperationSerializer() {
-      super(Operation.class);
-    }
-
-    @Override
-    public void serialize(Operation value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-      gen.writeStartObject();
-      gen.writeStringField("name", value.getName());
-      gen.writeStringField("opcode", Bytes.of(value.getOpcode()).toHexString());
-      gen.writeEndObject();
-    }
-  }
-
   static class BytesSerializer extends StdSerializer<Bytes> {
 
     BytesSerializer() {
@@ -151,40 +136,6 @@ public class JsonModule extends SimpleModule {
         topics.add(LogTopic.fromHexString(t));
       }
       return new Log(Address.fromHexString(logger), Bytes.fromHexString(data), topics);
-    }
-  }
-
-  static class OperationModel {
-    public String name;
-    public String opcode;
-  }
-
-  static class OperationModelDeserializer extends StdDeserializer<OperationModel> {
-
-    protected OperationModelDeserializer() {
-      super(OperationModel.class);
-    }
-
-    @Override
-    public OperationModel deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-      String opcode = null;
-      String opname = null;
-      while (p.nextToken() != JsonToken.END_OBJECT) {
-        String name = p.getCurrentName();
-        if ("name".equals(name)) {
-          p.nextToken();
-          opname = p.getText();
-        } else if ("opcode".equals(name)) {
-          p.nextToken();
-          opcode = p.getText();
-        }
-      }
-
-      OperationModel model = new OperationModel();
-      model.name = opname;
-      model.opcode = opcode;
-
-      return model;
     }
   }
 
@@ -254,9 +205,7 @@ public class JsonModule extends SimpleModule {
     addSerializer(new GasSerializer());
     addSerializer(new WeiSerializer());
     addSerializer(new BytesSerializer());
-    addSerializer(new OperationSerializer());
     addSerializer(new OptionalSerializer());
-    addDeserializer(OperationModel.class, new OperationModelDeserializer());
     addDeserializer(Log.class, new LogDeserializer());
     addDeserializer(ExceptionalHaltReason.class, new ExceptionalHaltReasonDeserializer());
     addDeserializer(Account.class, new AccountDeserializer());

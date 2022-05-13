@@ -9,30 +9,37 @@ import org.apache.tuweni.units.bigints.UInt256;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
 import org.hyperledger.besu.evm.Gas;
+import org.hyperledger.besu.evm.MainnetEVMs;
 import org.hyperledger.besu.evm.account.Account;
+import org.hyperledger.besu.evm.fluent.SimpleAccount;
 import org.hyperledger.besu.evm.frame.BlockValues;
 import org.hyperledger.besu.evm.frame.ExceptionalHaltReason;
 import org.hyperledger.besu.evm.log.Log;
 import org.hyperledger.besu.evm.operation.Operation;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Stack;
 
 /**
  * Model representing a test of an EVM opcode.
  * <p>
  * This model can be serialized into a YAML document, to be consumed by implementers.
  */
-@JsonPropertyOrder(alphabetic = true, value = {"operation", "gas", "blockData", "gasPrice", "inputData", "haltReason", "before", "after"})
+@JsonPropertyOrder(value = {"name", "hardFork", "index", "before", "after", "sender", "receiver",
+    "inputData", "value", "code", "gasPrice", "gasUsed", "allGasUsed", "gasAvailable", "gasLimit",
+    "haltReason", "coinbase", "refunds", "number", "timestamp", "mixHashOrPrevRandao", "baseFee", "chainId", "difficultyBytes"})
 public class OpcodeTestModel {
 
   private final String hardFork;
   private final List<Account> accounts;
-  private final Operation operation;
+  private final String name;
   private final Gas gasUsed;
   private final Object haltReason;
   private final List<Account> post;
@@ -54,6 +61,58 @@ public class OpcodeTestModel {
   private final Address sender;
   private final Wei value;
   private final Bytes code;
+
+  public static OpcodeTestModel fromJsonReferenceTest(String hardFork, String name, JsonReferenceTest test) {
+
+    List<Account> preAccounts = new ArrayList<>();
+    for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry: test.getPre().entrySet()) {
+      JsonReferenceTest.JsonAccountState state = entry.getValue();
+      SimpleAccount account = new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance());
+      for (Map.Entry<UInt256, UInt256> storageEntry : state.getStorage().entrySet()) {
+        account.setStorageValue(storageEntry.getKey(), storageEntry.getValue());
+      }
+      account.setCode(state.getCode());
+      preAccounts.add(account);
+    }
+
+    if (!test.getPre().containsKey(test.getExec().getCaller())) {
+      SimpleAccount account = new SimpleAccount(test.getExec().getCaller(), 0L, Wei.wrap(test.getExec().getValue()));
+      preAccounts.add(account);
+    }
+
+    List<Account> postAccounts = new ArrayList<>();
+    for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry: test.getPost().entrySet()) {
+      postAccounts.add(new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance()));
+    }
+
+    // we mangle the after state, we will recreate it anyway.
+    After after = new After(new ArrayList<>(),new ArrayList<>(), postAccounts, new ArrayList<>());
+
+    Before before = new Before(new ArrayList<>(),new ArrayList<>(),preAccounts);
+    return new OpcodeTestModel(hardFork,
+        name,
+        after,
+        before,
+        test.getExec().getData(),
+        test.getExec().getGasPrice(),
+        test.getGas().toHexString(),
+        test.getExec().getGas().toHexString(), // gas used by opcode, will be recomputed
+        test.getExec().getGas().toHexString(), // all gas used, will be recomputed
+        new HashMap<>(),
+        ExceptionalHaltReason.NONE,
+        test.getEnv().getCurrentDifficulty(),
+        Bytes32.ZERO,
+        test.getEnv().getCurrentGasLimit().toLong(),
+        test.getEnv().getCurrentTimestamp().toLong(),
+        Wei.ZERO,
+        test.getEnv().getCurrentNumber().toLong(),
+        test.getExec().getCaller(),
+        test.getExec().getAddress(),
+        Wei.wrap(test.getExec().getValue()),
+        test.getExec().getCode(),
+        test.getEnv().getCurrentCoinbase(),
+        UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
+  }
 
   public String getHardFork() {
     return hardFork;
@@ -103,7 +162,10 @@ public class OpcodeTestModel {
     private final List<Log> logs;
 
     @JsonCreator
-    public After(@JsonProperty("stack") List<Bytes> stackAfter, @JsonProperty("memory") List<Bytes32> memoryAfter, @JsonProperty("accounts") List<Account> accounts, @JsonProperty("logs") List<Log> logs) {
+    public After(@JsonProperty("stack") List<Bytes> stackAfter,
+                 @JsonProperty("memory") List<Bytes32> memoryAfter,
+                 @JsonProperty("accounts") List<Account> accounts,
+                 @JsonProperty("logs") List<Log> logs) {
       this.stackAfter = stackAfter;
       this.memoryAfter = memoryAfter;
       this.accounts = accounts;
@@ -129,7 +191,7 @@ public class OpcodeTestModel {
 
   @JsonCreator
   public OpcodeTestModel(@JsonProperty("hardFork") String hardFork,
-                         @JsonProperty("operation") JsonModule.OperationModel operation,
+                         @JsonProperty("name") String name,
                          @JsonProperty("after") After after,
                          @JsonProperty("before") Before before,
                          @JsonProperty("inputData") Bytes inputData,
@@ -174,15 +236,13 @@ public class OpcodeTestModel {
     this.memoryBefore = before.getMemory();
     this.stackAfter = after.getStack();
     this.stackBefore = before.getStack();
-    EVMExecutor executor = EVMExecutors.registry.get(hardFork).get();
-
-    this.operation = executor.getOperationsRegistry().get(Bytes.fromHexString(operation.opcode).get(0));
+    this.name = name;
   }
 
 
   public OpcodeTestModel(String hardFork,
                          List<Account> accounts,
-                         Operation operation,
+                         String name,
                          List<Bytes> stackAfter,
                          List<Bytes32> memoryAfter,
                          List<Bytes> stackBefore,
@@ -204,7 +264,7 @@ public class OpcodeTestModel {
                          Address coinbase,
                          UInt256 chainId) {
     this.accounts = accounts;
-    this.operation = operation;
+    this.name = name;
     this.gasAvailable = gasAvailable;
     this.gasUsed = gasUsed.orElse(Gas.ZERO);
     this.allGasUsed = allGasUsed;
@@ -232,8 +292,8 @@ public class OpcodeTestModel {
     return receiver;
   }
 
-  public Operation getOperation() {
-    return operation;
+  public String getName() {
+    return name;
   }
 
   public Gas getGasUsed() {
@@ -321,12 +381,12 @@ public class OpcodeTestModel {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     OpcodeTestModel that = (OpcodeTestModel) o;
-    return index == that.index && Objects.equals(hardFork, that.hardFork) && Objects.equals(accounts, that.accounts) && Objects.equals(operation, that.operation) && Objects.equals(gasUsed, that.gasUsed) && Objects.equals(haltReason, that.haltReason) && Objects.equals(post, that.post) && Objects.equals(inputData, that.inputData) && Objects.equals(gasPrice, that.gasPrice) && Objects.equals(logs, that.logs) && Objects.equals(stackBefore, that.stackBefore) && Objects.equals(memoryBefore, that.memoryBefore) && Objects.equals(stackAfter, that.stackAfter) && Objects.equals(memoryAfter, that.memoryAfter) && Objects.equals(blockData, that.blockData) && Objects.equals(coinbase, that.coinbase) && Objects.equals(gasAvailable, that.gasAvailable) && Objects.equals(allGasUsed, that.allGasUsed) && Objects.equals(refunds, that.refunds) && Objects.equals(receiver, that.receiver) && Objects.equals(chainId, that.chainId) && Objects.equals(sender, that.sender) && Objects.equals(value, that.value) && Objects.equals(code, that.code);
+    return index == that.index && Objects.equals(hardFork, that.hardFork) && Objects.equals(accounts, that.accounts) && Objects.equals(name, that.name) && Objects.equals(gasUsed, that.gasUsed) && Objects.equals(haltReason, that.haltReason) && Objects.equals(post, that.post) && Objects.equals(inputData, that.inputData) && Objects.equals(gasPrice, that.gasPrice) && Objects.equals(logs, that.logs) && Objects.equals(stackBefore, that.stackBefore) && Objects.equals(memoryBefore, that.memoryBefore) && Objects.equals(stackAfter, that.stackAfter) && Objects.equals(memoryAfter, that.memoryAfter) && Objects.equals(blockData, that.blockData) && Objects.equals(coinbase, that.coinbase) && Objects.equals(gasAvailable, that.gasAvailable) && Objects.equals(allGasUsed, that.allGasUsed) && Objects.equals(refunds, that.refunds) && Objects.equals(receiver, that.receiver) && Objects.equals(chainId, that.chainId) && Objects.equals(sender, that.sender) && Objects.equals(value, that.value) && Objects.equals(code, that.code);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hardFork, accounts, operation, gasUsed, haltReason, post, inputData, gasPrice, logs, stackBefore, memoryBefore, stackAfter, memoryAfter, blockData, coinbase, gasAvailable, allGasUsed, refunds, receiver, chainId, index, sender, value, code);
+    return Objects.hash(hardFork, accounts, name, gasUsed, haltReason, post, inputData, gasPrice, logs, stackBefore, memoryBefore, stackAfter, memoryAfter, blockData, coinbase, gasAvailable, allGasUsed, refunds, receiver, chainId, index, sender, value, code);
   }
 
   @Override
@@ -334,7 +394,7 @@ public class OpcodeTestModel {
     return "OpcodeTestModel{" +
         "hardFork='" + hardFork + '\'' +
         ", accounts=" + accounts +
-        ", operation=" + operation +
+        ", name=" + name +
         ", gasUsed=" + gasUsed +
         ", haltReason=" + haltReason +
         ", post=" + post +

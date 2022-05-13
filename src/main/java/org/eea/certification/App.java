@@ -80,7 +80,7 @@ public class App {
       Path folder = testsPath.resolve(hardFork);
       folder.toFile().mkdirs();
       OpcodeTestModel result = EVMOpcodeTestGenerator.run(model, hardFork);
-      Path testFile = folder.resolve(result.getOperation().getName() + "-" + result.getIndex() + ".yaml");
+      Path testFile = folder.resolve(result.getName() + "-" + result.getIndex() + ".yaml");
       try {
         mapper.writeValue(testFile.toFile(), result);
       } catch (IOException e) {
@@ -99,7 +99,7 @@ public class App {
     for (OpcodeTestModel test : tests) {
       Path folder = path.resolve(test.getHardFork());
       folder.toFile().mkdirs();
-      Path testFile = folder.resolve(test.getOperation().getName() + "-" + test.getIndex() + ".yaml");
+      Path testFile = folder.resolve(test.getName() + "-" + test.getIndex() + ".yaml");
       try {
         mapper.writeValue(testFile.toFile(), test);
       } catch (IOException e) {

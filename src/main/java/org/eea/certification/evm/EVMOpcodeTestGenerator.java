@@ -15,10 +15,8 @@ import org.hyperledger.besu.evm.account.Account;
 import org.hyperledger.besu.evm.fluent.SimpleWorld;
 import org.hyperledger.besu.evm.frame.ExceptionalHaltReason;
 import org.hyperledger.besu.evm.frame.MessageFrame;
-import org.hyperledger.besu.evm.internal.EvmConfiguration;
 import org.hyperledger.besu.evm.operation.Operation;
 import org.hyperledger.besu.evm.operation.OperationRegistry;
-import org.hyperledger.besu.evm.precompile.MainnetPrecompiledContracts;
 import org.hyperledger.besu.evm.precompile.PrecompileContractRegistry;
 import org.hyperledger.besu.evm.processor.MessageCallProcessor;
 import org.slf4j.Logger;
@@ -279,7 +277,7 @@ public class EVMOpcodeTestGenerator {
 
       return new OpcodeTestModel(executor.getHardFork(),
           pre,
-          operation,
+          operation.getName(),
           stackAfter,
           memoryAfter,
           stackBefore,
@@ -383,7 +381,7 @@ public class EVMOpcodeTestGenerator {
 
         currentOperation.set(frame.getCurrentOperation());
         Operation.OperationResult result = executeOperation.execute();
-        if (executedOpcode.compareAndSet(false, frame.getCurrentOperation().getOpcode() == model.getOperation().getOpcode())) {
+        if (executedOpcode.compareAndSet(false, frame.getCurrentOperation().getName().equals(model.getName()))) {
           gasCost.set(result.getGasCost());
           stackAfter.clear();
           for (int i = 0; i < frame.stackSize(); i++) {
@@ -408,16 +406,19 @@ public class EVMOpcodeTestGenerator {
       return null;
     }
     Operation current = currentOperation.get();
-    if (current != null && (current.getOpcode() == 0x00 || current.getOpcode() == model.getOperation().getOpcode())) {
+    if (current != null && current.getOpcode() == 0x00) {
       List<Account> pre = new ArrayList<>();
       pre.add(worldUpdater.get(sender));
-      pre.add(worldUpdater.get(coinbase));
+      Account coinbaseAccount = worldUpdater.get(coinbase);
+      if (coinbaseAccount != null) {
+        pre.add(coinbaseAccount);
+      }
       pre.add(worldUpdater.get(receiver));
       Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
       OpcodeTestModel result = new OpcodeTestModel(executor.getHardFork(),
           pre,
-          model.getOperation(),
+          model.getName(),
           stackAfter,
           memoryAfter,
           stackBefore,

@@ -17,6 +17,6 @@ public class OpcodeTestModelTest {
     mapper.registerModule(new JsonModule());
     mapper.registerModule(new EthJsonModule());
     OpcodeTestModel model = mapper.readValue(getClass().getResourceAsStream("/SWAP15-4.yaml"), OpcodeTestModel.class);
-    assertEquals("SWAP15", model.getOperation().getName());
+    assertEquals("SWAP15", model.getName());
   }
 }
