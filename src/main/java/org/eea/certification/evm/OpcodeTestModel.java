@@ -81,8 +81,10 @@ public class OpcodeTestModel {
     }
 
     List<Account> postAccounts = new ArrayList<>();
-    for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry: test.getPost().entrySet()) {
-      postAccounts.add(new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance()));
+    if (test.getPost() != null) {
+      for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry : test.getPost().entrySet()) {
+        postAccounts.add(new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance()));
+      }
     }
 
     // we mangle the after state, we will recreate it anyway.
@@ -95,9 +97,9 @@ public class OpcodeTestModel {
         before,
         test.getExec().getData(),
         test.getExec().getGasPrice(),
-        test.getGas().toHexString(),
         test.getExec().getGas().toHexString(), // gas used by opcode, will be recomputed
         test.getExec().getGas().toHexString(), // all gas used, will be recomputed
+        test.getGas() == null ? "0x" : test.getGas().toHexString(),
         new HashMap<>(),
         ExceptionalHaltReason.NONE,
         test.getEnv().getCurrentDifficulty(),

@@ -194,30 +194,8 @@ public class EVMOpcodeTestGenerator {
 
     Wei value = generateWei();
     Gas gasAvailable = initialGas();
-    MessageFrame initialMessageFrame =
-        MessageFrame.builder()
-            .type(MessageFrame.Type.MESSAGE_CALL)
-            .messageFrameStack(messageFrameStack)
-            .worldUpdater(worldUpdater.updater())
-            .initialGas(gasAvailable)
-            .contract(Address.ZERO)
-            .address(receiver)
-            .originator(sender)
-            .sender(sender)
-            .gasPrice(generateWei())
-            .inputData(generateInputData())
-            .value(value)
-            .apparentValue(value)
-            .code(code)
-            .blockValues(blockValues)
-            .depth(0)
-            .completer(c -> {
-            })
-            .miningBeneficiary(coinbase)
-            .blockHashLookup(h -> null)
-            .accessListWarmAddresses(Collections.emptySet())
-            .accessListWarmStorage(ImmutableSetMultimap.of())
-            .build();
+    MessageFrame initialMessageFrame = MessageFrame.builder().type(MessageFrame.Type.MESSAGE_CALL).messageFrameStack(messageFrameStack).worldUpdater(worldUpdater.updater()).initialGas(gasAvailable).contract(Address.ZERO).address(receiver).originator(sender).sender(sender).gasPrice(generateWei()).inputData(generateInputData()).value(value).apparentValue(value).code(code).blockValues(blockValues).depth(0).completer(c -> {
+    }).miningBeneficiary(coinbase).blockHashLookup(h -> null).accessListWarmAddresses(Collections.emptySet()).accessListWarmStorage(ImmutableSetMultimap.of()).build();
     AtomicReference<Optional<Gas>> gasCost = new AtomicReference<>();
     AtomicReference<ExceptionalHaltReason> haltReason = new AtomicReference<>();
     AtomicReference<Operation> currentOperation = new AtomicReference<>();
@@ -275,29 +253,7 @@ public class EVMOpcodeTestGenerator {
       pre.add(receiverAccount);
       Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
-      return new OpcodeTestModel(executor.getHardFork(),
-          pre,
-          operation.getName(),
-          stackAfter,
-          memoryAfter,
-          stackBefore,
-          memoryBefore,
-          initialMessageFrame.getInputData(),
-          initialMessageFrame.getGasPrice(),
-          initialMessageFrame.getLogs(),
-          gasAvailable,
-          gasCost.get(),
-          allGasCost,
-          initialMessageFrame.getRefunds(),
-          haltReason.get(),
-          worldUpdater.getTouchedAccounts(),
-          blockValues,
-          sender,
-          receiver,
-          initialMessageFrame.getValue(),
-          codeBytes,
-          coinbase,
-          UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
+      return new OpcodeTestModel(executor.getHardFork(), pre, operation.getName(), stackAfter, memoryAfter, stackBefore, memoryBefore, initialMessageFrame.getInputData(), initialMessageFrame.getGasPrice(), initialMessageFrame.getLogs(), gasAvailable, gasCost.get(), allGasCost, initialMessageFrame.getRefunds(), haltReason.get(), worldUpdater.getTouchedAccounts(), blockValues, sender, receiver, initialMessageFrame.getValue(), codeBytes, coinbase, UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
     }
 
     // the execution didn't go as far as running the opcode.
@@ -306,7 +262,8 @@ public class EVMOpcodeTestGenerator {
 
   /**
    * Runs a given test model, with a hard fork of our choosing
-   * @param model the model to run
+   *
+   * @param model    the model to run
    * @param hardFork the hard fork to associate with the execution
    * @return a new model execution with the hard fork.
    */
@@ -332,119 +289,46 @@ public class EVMOpcodeTestGenerator {
 
     Wei value = model.getValue();
     Gas gasAvailable = model.getGasAvailable();
-    MessageFrame initialMessageFrame =
-        MessageFrame.builder()
-            .type(MessageFrame.Type.MESSAGE_CALL)
-            .messageFrameStack(messageFrameStack)
-            .worldUpdater(worldUpdater.updater())
-            .initialGas(gasAvailable)
-            .contract(Address.ZERO)
-            .address(receiver)
-            .originator(sender)
-            .sender(sender)
-            .gasPrice(model.getGasPrice())
-            .inputData(model.getInputData())
-            .value(value)
-            .apparentValue(value)
-            .code(code)
-            .blockValues(blockValues)
-            .depth(0)
-            .completer(c -> {
-            })
-            .miningBeneficiary(coinbase)
-            .blockHashLookup(h -> null)
-            .accessListWarmAddresses(Collections.emptySet())
-            .accessListWarmStorage(ImmutableSetMultimap.of())
-            .build();
+    MessageFrame initialMessageFrame = MessageFrame.builder().type(MessageFrame.Type.MESSAGE_CALL).messageFrameStack(messageFrameStack).worldUpdater(worldUpdater.updater()).initialGas(gasAvailable).contract(Address.ZERO).address(receiver).originator(sender).sender(sender).gasPrice(model.getGasPrice()).inputData(model.getInputData()).value(value).apparentValue(value).code(code).blockValues(blockValues).depth(0).completer(c -> {
+    }).miningBeneficiary(coinbase).blockHashLookup(h -> null).accessListWarmAddresses(Collections.emptySet()).accessListWarmStorage(ImmutableSetMultimap.of()).build();
     AtomicReference<Optional<Gas>> gasCost = new AtomicReference<>();
-    AtomicReference<ExceptionalHaltReason> haltReason = new AtomicReference<>();
-    AtomicReference<Operation> currentOperation = new AtomicReference<>();
 
     messageFrameStack.add(initialMessageFrame);
-    List<Bytes> stackBefore = new ArrayList<>();
     List<Bytes> stackAfter = new ArrayList<>();
-    List<Bytes32> memoryBefore = new ArrayList<>();
     List<Bytes32> memoryAfter = new ArrayList<>();
-    AtomicBoolean executedOpcode = new AtomicBoolean(false);
     try {
       mcp.process(initialMessageFrame, (frame, executeOperation) -> {
-        if (!executedOpcode.get()) {
-          stackBefore.clear();
-          for (int i = 0; i < frame.stackSize(); i++) {
-            stackBefore.add(frame.getStackItem(i));
-          }
-          memoryBefore.clear();
-          for (int i = 0; i < frame.memoryWordSize(); i++) {
-            memoryBefore.add((Bytes32) frame.readMemory(i * 32L, 32L));
-          }
-        }
-
-        currentOperation.set(frame.getCurrentOperation());
         Operation.OperationResult result = executeOperation.execute();
-        if (executedOpcode.compareAndSet(false, frame.getCurrentOperation().getName().equals(model.getName()))) {
-          gasCost.set(result.getGasCost());
-          stackAfter.clear();
-          for (int i = 0; i < frame.stackSize(); i++) {
-            stackAfter.add(frame.getStackItem(i));
-          }
-          for (int i = 0; i < frame.memoryWordSize(); i++) {
-            memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
-          }
+        gasCost.set(result.getGasCost());
+        stackAfter.clear();
+        for (int i = 0; i < frame.stackSize(); i++) {
+          stackAfter.add(frame.getStackItem(i));
         }
-        haltReason.set(result.getHaltReason().orElse(ExceptionalHaltReason.NONE));
-
+        for (int i = 0; i < frame.memoryWordSize(); i++) {
+          memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
+        }
       });
     } catch (IllegalStateException e) {
       // do nothing.
     }
+    ExceptionalHaltReason haltReason = initialMessageFrame.getExceptionalHaltReason().orElse(ExceptionalHaltReason.NONE);
+
     // the memory is too large, not a suitable outcome. return null
     if (memoryAfter.size() > 128) {
       return null;
     }
-    // try to only get opcode execution that doesn't result in an out of gas error
-    if (haltReason.get() == ExceptionalHaltReason.INSUFFICIENT_GAS) {
-      return null;
+    List<Account> pre = new ArrayList<>();
+    pre.add(worldUpdater.get(sender));
+    Account coinbaseAccount = worldUpdater.get(coinbase);
+    if (coinbaseAccount != null) {
+      pre.add(coinbaseAccount);
     }
-    Operation current = currentOperation.get();
-    if (current != null && current.getOpcode() == 0x00) {
-      List<Account> pre = new ArrayList<>();
-      pre.add(worldUpdater.get(sender));
-      Account coinbaseAccount = worldUpdater.get(coinbase);
-      if (coinbaseAccount != null) {
-        pre.add(coinbaseAccount);
-      }
-      pre.add(worldUpdater.get(receiver));
-      Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
+    pre.add(worldUpdater.get(receiver));
+    Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
-      OpcodeTestModel result = new OpcodeTestModel(executor.getHardFork(),
-          pre,
-          model.getName(),
-          stackAfter,
-          memoryAfter,
-          stackBefore,
-          memoryBefore,
-          initialMessageFrame.getInputData(),
-          initialMessageFrame.getGasPrice(),
-          initialMessageFrame.getLogs(),
-          gasAvailable,
-          gasCost.get(),
-          allGasCost,
-          initialMessageFrame.getRefunds(),
-          haltReason.get(),
-          worldUpdater.getTouchedAccounts(),
-          blockValues,
-          sender,
-          receiver,
-          value,
-          model.getCode(),
-          coinbase,
-          UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
-      result.setIndex(model.getIndex());
-      return result;
-    }
-
-    // the execution didn't go as far as running the opcode.
-    return null;
+    OpcodeTestModel result = new OpcodeTestModel(executor.getHardFork(), pre, model.getName(), stackAfter, memoryAfter, new ArrayList<>(), new ArrayList<>(), initialMessageFrame.getInputData(), initialMessageFrame.getGasPrice(), initialMessageFrame.getLogs(), gasAvailable, Optional.empty(), allGasCost, initialMessageFrame.getRefunds(), haltReason, worldUpdater.getTouchedAccounts(), blockValues, sender, receiver, value, model.getCode(), coinbase, UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
+    result.setIndex(model.getIndex());
+    return result;
   }
 
 }

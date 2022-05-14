@@ -1,5 +1,6 @@
 package org.eea.certification;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.tuweni.eth.EthJsonModule;
@@ -7,12 +8,21 @@ import org.eea.certification.evm.EVMExecutor;
 import org.eea.certification.evm.EVMExecutors;
 import org.eea.certification.evm.EVMOpcodeTestGenerator;
 import org.eea.certification.evm.JsonModule;
+import org.eea.certification.evm.JsonReferenceTest;
 import org.eea.certification.evm.OpcodeTestModel;
 
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
@@ -46,6 +56,11 @@ public class App {
         Path testsPath = Paths.get(args.length >= 3 ? args[2] : "");
 
         recreate(modelPath, testsPath);
+      } else if ("vmtests".equals(action)) {
+        Path referenceTests = Paths.get(args.length >= 2 ? args[1] : "");
+        Path testsPath = Paths.get(args.length >= 3 ? args[2] : "");
+
+        vmtests(referenceTests, testsPath);
       } else {
         System.err.println("Unrecognized command " + action);
         System.exit(1);
@@ -55,6 +70,58 @@ public class App {
       System.exit(1);
     }
 
+  }
+
+  private static void vmtests(Path referenceTestsFolder, Path testsPath) {
+    if (!referenceTestsFolder.toFile().exists()) {
+      System.err.println("Cannot find reference test folder: " + referenceTestsFolder);
+      System.exit(1);
+    }
+    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {
+    };
+    List<OpcodeTestModel> referenceTests = new ArrayList<>();
+    FileVisitor<Path> visitor = new SimpleFileVisitor<>() {
+      @Override
+      public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        if (file.getFileName().toString().endsWith(".json")) {
+          Map<String, JsonReferenceTest> tests = mapper.readValue(file.toFile(), ref);
+          for (Map.Entry<String, JsonReferenceTest> entry : tests.entrySet()) {
+            OpcodeTestModel model = OpcodeTestModel.fromJsonReferenceTest("frontier", entry.getKey(), entry.getValue());
+            referenceTests.add(model);
+          }
+        }
+        return FileVisitResult.CONTINUE;
+      }
+    };
+    try {
+      Files.walkFileTree(referenceTestsFolder, visitor);
+    } catch (IOException e) {
+      System.err.println("Cannot read reference test folder: " + referenceTestsFolder + ": " + e.getMessage());
+      System.exit(1);
+    }
+    testsPath.toFile().mkdirs();
+    for (OpcodeTestModel model : referenceTests) {
+      if (model.getName().contains("loop")) {
+        continue;
+      }
+      for (Supplier<EVMExecutor> executor : EVMExecutors.registry.values()) {
+        String hardFork = executor.get().getHardFork();
+        Path folder = testsPath.resolve(hardFork);
+        folder.toFile().mkdirs();
+        OpcodeTestModel result = EVMOpcodeTestGenerator.run(model, hardFork);
+        if (result == null) {
+          continue;
+        }
+        Path testFile = folder.resolve(result.getName() + "-" + result.getIndex() + ".yaml");
+        try {
+          mapper.writeValue(testFile.toFile(), result);
+        } catch (IOException e) {
+          System.err.println("Cannot write test file contents: " + testFile);
+          e.printStackTrace();
+          System.exit(1);
+        }
+      }
+    }
   }
 
   private static void recreate(Path modelPath, Path testsPath) {
