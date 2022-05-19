@@ -11,7 +11,11 @@ public class EVMExecutor {
   private final OperationRegistry operationsRegistry;
   private final String hardFork;
 
-  EVMExecutor(String hardFork, EVM evm, PrecompileContractRegistry precompileContractRegistry, OperationRegistry operationRegistry) {
+  EVMExecutor(
+      String hardFork,
+      EVM evm,
+      PrecompileContractRegistry precompileContractRegistry,
+      OperationRegistry operationRegistry) {
     this.evm = evm;
     this.precompileContractRegistry = precompileContractRegistry;
     this.operationsRegistry = operationRegistry;

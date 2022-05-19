@@ -1,13 +1,14 @@
 package org.eea.certification.evm;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.tuweni.eth.EthJsonModule;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.junit.jupiter.api.Test;
 
 public class OpcodeTestModelTest {
 

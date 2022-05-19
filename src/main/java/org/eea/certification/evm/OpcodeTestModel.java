@@ -1,11 +1,20 @@
 package org.eea.certification.evm;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.bytes.Bytes32;
 import org.apache.tuweni.units.bigints.UInt256;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
 import org.hyperledger.besu.evm.Gas;
@@ -15,26 +24,37 @@ import org.hyperledger.besu.evm.fluent.SimpleAccount;
 import org.hyperledger.besu.evm.frame.BlockValues;
 import org.hyperledger.besu.evm.frame.ExceptionalHaltReason;
 import org.hyperledger.besu.evm.log.Log;
-import org.hyperledger.besu.evm.operation.Operation;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Stack;
 
 /**
  * Model representing a test of an EVM opcode.
  * <p>
  * This model can be serialized into a YAML document, to be consumed by implementers.
  */
-@JsonPropertyOrder(value = {"name", "hardFork", "index", "before", "after", "sender", "receiver",
-    "inputData", "value", "code", "gasPrice", "gasUsed", "allGasUsed", "gasAvailable", "gasLimit",
-    "haltReason", "coinbase", "refunds", "number", "timestamp", "mixHashOrPrevRandao", "baseFee", "chainId", "difficultyBytes"})
+@JsonPropertyOrder(value = {
+    "name",
+    "hardFork",
+    "index",
+    "before",
+    "after",
+    "sender",
+    "receiver",
+    "inputData",
+    "value",
+    "code",
+    "gasPrice",
+    "gasUsed",
+    "allGasUsed",
+    "gasAvailable",
+    "gasLimit",
+    "haltReason",
+    "coinbase",
+    "refunds",
+    "number",
+    "timestamp",
+    "mixHashOrPrevRandao",
+    "baseFee",
+    "chainId",
+    "difficultyBytes"})
 public class OpcodeTestModel {
 
   private final String hardFork;
@@ -65,9 +85,10 @@ public class OpcodeTestModel {
   public static OpcodeTestModel fromJsonReferenceTest(String hardFork, String name, JsonReferenceTest test) {
 
     List<Account> preAccounts = new ArrayList<>();
-    for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry: test.getPre().entrySet()) {
+    for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry : test.getPre().entrySet()) {
       JsonReferenceTest.JsonAccountState state = entry.getValue();
-      SimpleAccount account = new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance());
+      SimpleAccount account =
+          new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance());
       for (Map.Entry<UInt256, UInt256> storageEntry : state.getStorage().entrySet()) {
         account.setStorageValue(storageEntry.getKey(), storageEntry.getValue());
       }
@@ -83,15 +104,18 @@ public class OpcodeTestModel {
     List<Account> postAccounts = new ArrayList<>();
     if (test.getPost() != null) {
       for (Map.Entry<Address, JsonReferenceTest.JsonAccountState> entry : test.getPost().entrySet()) {
-        postAccounts.add(new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance()));
+        postAccounts
+            .add(
+                new SimpleAccount(entry.getKey(), entry.getValue().getNonce().toLong(), entry.getValue().getBalance()));
       }
     }
 
     // we mangle the after state, we will recreate it anyway.
-    After after = new After(new ArrayList<>(),new ArrayList<>(), postAccounts, new ArrayList<>());
+    After after = new After(new ArrayList<>(), new ArrayList<>(), postAccounts, new ArrayList<>());
 
-    Before before = new Before(new ArrayList<>(),new ArrayList<>(),preAccounts);
-    return new OpcodeTestModel(hardFork,
+    Before before = new Before(new ArrayList<>(), new ArrayList<>(), preAccounts);
+    return new OpcodeTestModel(
+        hardFork,
         name,
         after,
         before,
@@ -136,7 +160,10 @@ public class OpcodeTestModel {
     private final List<Account> accounts;
 
     @JsonCreator
-    public Before(@JsonProperty("stack") List<Bytes> stackBefore,@JsonProperty("memory") List<Bytes32> memoryBefore, @JsonProperty("accounts") List<Account> accounts) {
+    public Before(
+        @JsonProperty("stack") List<Bytes> stackBefore,
+        @JsonProperty("memory") List<Bytes32> memoryBefore,
+        @JsonProperty("accounts") List<Account> accounts) {
       this.stackBefore = stackBefore;
       this.memoryBefore = memoryBefore;
       this.accounts = accounts;
@@ -164,10 +191,11 @@ public class OpcodeTestModel {
     private final List<Log> logs;
 
     @JsonCreator
-    public After(@JsonProperty("stack") List<Bytes> stackAfter,
-                 @JsonProperty("memory") List<Bytes32> memoryAfter,
-                 @JsonProperty("accounts") List<Account> accounts,
-                 @JsonProperty("logs") List<Log> logs) {
+    public After(
+        @JsonProperty("stack") List<Bytes> stackAfter,
+        @JsonProperty("memory") List<Bytes32> memoryAfter,
+        @JsonProperty("accounts") List<Account> accounts,
+        @JsonProperty("logs") List<Log> logs) {
       this.stackAfter = stackAfter;
       this.memoryAfter = memoryAfter;
       this.accounts = accounts;
@@ -192,30 +220,30 @@ public class OpcodeTestModel {
   }
 
   @JsonCreator
-  public OpcodeTestModel(@JsonProperty("hardFork") String hardFork,
-                         @JsonProperty("name") String name,
-                         @JsonProperty("after") After after,
-                         @JsonProperty("before") Before before,
-                         @JsonProperty("inputData") Bytes inputData,
-                         @JsonProperty("gasPrice") Wei gasPrice,
-                         @JsonProperty("gasAvailable") String gasAvailable,
-                         @JsonProperty("gasUsed") String gasUsed,
-                         @JsonProperty("allGasUsed") String allGasUsed,
-                         @JsonProperty("refunds")  Map<Address, Wei> refunds,
-                         @JsonProperty("haltReason") ExceptionalHaltReason exceptionalHaltReason,
-                         @JsonProperty("difficultyBytes")  Bytes difficultyBytes,
-                         @JsonProperty("mixHashOrPrevRandao")  Bytes32 mixHashOrPrevRandao,
-                         @JsonProperty("gasLimit")  long gasLimit,
-                         @JsonProperty("timestamp")  long timestamp,
-                         @JsonProperty("baseFee") Wei baseFee,
-                         @JsonProperty("number") long number,
-                         @JsonProperty("sender") Address sender,
-                         @JsonProperty("receiver") Address receiver,
-                         @JsonProperty("value") Wei value,
-                         @JsonProperty("code") Bytes code,
-                         @JsonProperty("coinbase") Address coinbase,
-                         @JsonProperty("chainId") UInt256 chainId
-                         ) {
+  public OpcodeTestModel(
+      @JsonProperty("hardFork") String hardFork,
+      @JsonProperty("name") String name,
+      @JsonProperty("after") After after,
+      @JsonProperty("before") Before before,
+      @JsonProperty("inputData") Bytes inputData,
+      @JsonProperty("gasPrice") Wei gasPrice,
+      @JsonProperty("gasAvailable") String gasAvailable,
+      @JsonProperty("gasUsed") String gasUsed,
+      @JsonProperty("allGasUsed") String allGasUsed,
+      @JsonProperty("refunds") Map<Address, Wei> refunds,
+      @JsonProperty("haltReason") ExceptionalHaltReason exceptionalHaltReason,
+      @JsonProperty("difficultyBytes") Bytes difficultyBytes,
+      @JsonProperty("mixHashOrPrevRandao") Bytes32 mixHashOrPrevRandao,
+      @JsonProperty("gasLimit") long gasLimit,
+      @JsonProperty("timestamp") long timestamp,
+      @JsonProperty("baseFee") Wei baseFee,
+      @JsonProperty("number") long number,
+      @JsonProperty("sender") Address sender,
+      @JsonProperty("receiver") Address receiver,
+      @JsonProperty("value") Wei value,
+      @JsonProperty("code") Bytes code,
+      @JsonProperty("coinbase") Address coinbase,
+      @JsonProperty("chainId") UInt256 chainId) {
     this.hardFork = hardFork;
     this.accounts = before.getAccounts();
     this.inputData = inputData;
@@ -223,9 +251,15 @@ public class OpcodeTestModel {
     this.gasAvailable = Gas.fromHexString(gasAvailable);
     this.gasUsed = Gas.fromHexString(gasUsed);
     this.allGasUsed = Gas.fromHexString(allGasUsed);
-    this.refunds= refunds;
+    this.refunds = refunds;
     this.haltReason = exceptionalHaltReason;
-    this.blockData = new SettableBlockValues(difficultyBytes, mixHashOrPrevRandao, gasLimit, number, timestamp, Optional.ofNullable(baseFee));
+    this.blockData = new SettableBlockValues(
+        difficultyBytes,
+        mixHashOrPrevRandao,
+        gasLimit,
+        number,
+        timestamp,
+        Optional.ofNullable(baseFee));
     this.sender = sender;
     this.receiver = receiver;
     this.value = value;
@@ -242,29 +276,30 @@ public class OpcodeTestModel {
   }
 
 
-  public OpcodeTestModel(String hardFork,
-                         List<Account> accounts,
-                         String name,
-                         List<Bytes> stackAfter,
-                         List<Bytes32> memoryAfter,
-                         List<Bytes> stackBefore,
-                         List<Bytes32> memoryBefore,
-                         Bytes inputData,
-                         Wei gasPrice,
-                         List<Log> logs,
-                         Gas gasAvailable,
-                         Optional<Gas> gasUsed,
-                         Gas allGasUsed,
-                         Map<Address, Wei> refunds,
-                         ExceptionalHaltReason exceptionalHaltReason,
-                         Collection<? extends Account> touchedAccounts,
-                         BlockValues blockValues,
-                         Address sender,
-                         Address receiver,
-                         Wei value,
-                         Bytes code,
-                         Address coinbase,
-                         UInt256 chainId) {
+  public OpcodeTestModel(
+      String hardFork,
+      List<Account> accounts,
+      String name,
+      List<Bytes> stackAfter,
+      List<Bytes32> memoryAfter,
+      List<Bytes> stackBefore,
+      List<Bytes32> memoryBefore,
+      Bytes inputData,
+      Wei gasPrice,
+      List<Log> logs,
+      Gas gasAvailable,
+      Optional<Gas> gasUsed,
+      Gas allGasUsed,
+      Map<Address, Wei> refunds,
+      ExceptionalHaltReason exceptionalHaltReason,
+      Collection<? extends Account> touchedAccounts,
+      BlockValues blockValues,
+      Address sender,
+      Address receiver,
+      Wei value,
+      Bytes code,
+      Address coinbase,
+      UInt256 chainId) {
     this.accounts = accounts;
     this.name = name;
     this.gasAvailable = gasAvailable;
@@ -380,44 +415,119 @@ public class OpcodeTestModel {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     OpcodeTestModel that = (OpcodeTestModel) o;
-    return index == that.index && Objects.equals(hardFork, that.hardFork) && Objects.equals(accounts, that.accounts) && Objects.equals(name, that.name) && Objects.equals(gasUsed, that.gasUsed) && Objects.equals(haltReason, that.haltReason) && Objects.equals(post, that.post) && Objects.equals(inputData, that.inputData) && Objects.equals(gasPrice, that.gasPrice) && Objects.equals(logs, that.logs) && Objects.equals(stackBefore, that.stackBefore) && Objects.equals(memoryBefore, that.memoryBefore) && Objects.equals(stackAfter, that.stackAfter) && Objects.equals(memoryAfter, that.memoryAfter) && Objects.equals(blockData, that.blockData) && Objects.equals(coinbase, that.coinbase) && Objects.equals(gasAvailable, that.gasAvailable) && Objects.equals(allGasUsed, that.allGasUsed) && Objects.equals(refunds, that.refunds) && Objects.equals(receiver, that.receiver) && Objects.equals(chainId, that.chainId) && Objects.equals(sender, that.sender) && Objects.equals(value, that.value) && Objects.equals(code, that.code);
+    return index == that.index
+        && Objects.equals(hardFork, that.hardFork)
+        && Objects.equals(accounts, that.accounts)
+        && Objects.equals(name, that.name)
+        && Objects.equals(gasUsed, that.gasUsed)
+        && Objects.equals(haltReason, that.haltReason)
+        && Objects.equals(post, that.post)
+        && Objects.equals(inputData, that.inputData)
+        && Objects.equals(gasPrice, that.gasPrice)
+        && Objects.equals(logs, that.logs)
+        && Objects.equals(stackBefore, that.stackBefore)
+        && Objects.equals(memoryBefore, that.memoryBefore)
+        && Objects.equals(stackAfter, that.stackAfter)
+        && Objects.equals(memoryAfter, that.memoryAfter)
+        && Objects.equals(blockData, that.blockData)
+        && Objects.equals(coinbase, that.coinbase)
+        && Objects.equals(gasAvailable, that.gasAvailable)
+        && Objects.equals(allGasUsed, that.allGasUsed)
+        && Objects.equals(refunds, that.refunds)
+        && Objects.equals(receiver, that.receiver)
+        && Objects.equals(chainId, that.chainId)
+        && Objects.equals(sender, that.sender)
+        && Objects.equals(value, that.value)
+        && Objects.equals(code, that.code);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hardFork, accounts, name, gasUsed, haltReason, post, inputData, gasPrice, logs, stackBefore, memoryBefore, stackAfter, memoryAfter, blockData, coinbase, gasAvailable, allGasUsed, refunds, receiver, chainId, index, sender, value, code);
+    return Objects
+        .hash(
+            hardFork,
+            accounts,
+            name,
+            gasUsed,
+            haltReason,
+            post,
+            inputData,
+            gasPrice,
+            logs,
+            stackBefore,
+            memoryBefore,
+            stackAfter,
+            memoryAfter,
+            blockData,
+            coinbase,
+            gasAvailable,
+            allGasUsed,
+            refunds,
+            receiver,
+            chainId,
+            index,
+            sender,
+            value,
+            code);
   }
 
   @Override
   public String toString() {
-    return "OpcodeTestModel{" +
-        "hardFork='" + hardFork + '\'' +
-        ", accounts=" + accounts +
-        ", name=" + name +
-        ", gasUsed=" + gasUsed +
-        ", haltReason=" + haltReason +
-        ", post=" + post +
-        ", inputData=" + inputData +
-        ", gasPrice=" + gasPrice +
-        ", logs=" + logs +
-        ", stackBefore=" + stackBefore +
-        ", memoryBefore=" + memoryBefore +
-        ", stackAfter=" + stackAfter +
-        ", memoryAfter=" + memoryAfter +
-        ", blockData=" + blockData +
-        ", coinbase=" + coinbase +
-        ", gasAvailable=" + gasAvailable +
-        ", allGasUsed=" + allGasUsed +
-        ", refunds=" + refunds +
-        ", receiver=" + receiver +
-        ", chainId=" + chainId +
-        ", index=" + index +
-        ", sender=" + sender +
-        ", value=" + value +
-        ", code=" + code +
-        '}';
+    return "OpcodeTestModel{"
+        + "hardFork='"
+        + hardFork
+        + '\''
+        + ", accounts="
+        + accounts
+        + ", name="
+        + name
+        + ", gasUsed="
+        + gasUsed
+        + ", haltReason="
+        + haltReason
+        + ", post="
+        + post
+        + ", inputData="
+        + inputData
+        + ", gasPrice="
+        + gasPrice
+        + ", logs="
+        + logs
+        + ", stackBefore="
+        + stackBefore
+        + ", memoryBefore="
+        + memoryBefore
+        + ", stackAfter="
+        + stackAfter
+        + ", memoryAfter="
+        + memoryAfter
+        + ", blockData="
+        + blockData
+        + ", coinbase="
+        + coinbase
+        + ", gasAvailable="
+        + gasAvailable
+        + ", allGasUsed="
+        + allGasUsed
+        + ", refunds="
+        + refunds
+        + ", receiver="
+        + receiver
+        + ", chainId="
+        + chainId
+        + ", index="
+        + index
+        + ", sender="
+        + sender
+        + ", value="
+        + value
+        + ", code="
+        + code
+        + '}';
   }
 }

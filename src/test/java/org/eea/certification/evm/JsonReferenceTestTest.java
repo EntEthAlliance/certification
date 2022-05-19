@@ -1,19 +1,20 @@
 package org.eea.certification.evm;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.apache.tuweni.eth.Address;
 import org.apache.tuweni.eth.EthJsonModule;
-import org.hyperledger.besu.datatypes.Wei;
-import org.hyperledger.besu.evm.account.Account;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.hyperledger.besu.datatypes.Wei;
+import org.hyperledger.besu.evm.account.Account;
+import org.junit.jupiter.api.Test;
 
 
 public class JsonReferenceTestTest {
@@ -23,10 +24,11 @@ public class JsonReferenceTestTest {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new JsonModule());
     mapper.registerModule(new EthJsonModule());
-    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {
-    };
+    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {};
     Map<String, JsonReferenceTest> test = mapper.readValue(getClass().getResourceAsStream("/add3.json"), ref);
-    assertEquals(Address.fromHexString("0x0f572e5295c57f15886f9b263e2f6d2d6c7b5ec6"), test.get("add3").getExec().getAddress());
+    assertEquals(
+        Address.fromHexString("0x0f572e5295c57f15886f9b263e2f6d2d6c7b5ec6"),
+        test.get("add3").getExec().getAddress());
   }
 
   @Test
@@ -34,8 +36,7 @@ public class JsonReferenceTestTest {
     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
     mapper.registerModule(new JsonModule());
     mapper.registerModule(new EthJsonModule());
-    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {
-    };
+    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {};
     Map<String, JsonReferenceTest> tests = mapper.readValue(getClass().getResourceAsStream("/add3.json"), ref);
     JsonReferenceTest test = tests.get("add3");
     OpcodeTestModel model = OpcodeTestModel.fromJsonReferenceTest("frontier", "add3", test);
@@ -49,11 +50,12 @@ public class JsonReferenceTestTest {
     ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
     mapper.registerModule(new JsonModule());
     mapper.registerModule(new EthJsonModule());
-    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {
-    };
-    Map<String, JsonReferenceTest> test = mapper.readValue(getClass().getResourceAsStream("/push32AndSuicide.json"), ref);
+    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {};
+    Map<String, JsonReferenceTest> test =
+        mapper.readValue(getClass().getResourceAsStream("/push32AndSuicide.json"), ref);
     JsonReferenceTest model = test.get("push32AndSuicide");
-    JsonReferenceTest.JsonAccountState preState = model.getPre().get(Address.fromHexString("0x0f572e5295c57f15886f9b263e2f6d2d6c7b5ec6"));
+    JsonReferenceTest.JsonAccountState preState =
+        model.getPre().get(Address.fromHexString("0x0f572e5295c57f15886f9b263e2f6d2d6c7b5ec6"));
     assertEquals(Wei.fromHexString("0x152d02c7e14af6800000"), preState.getBalance());
     OpcodeTestModel parsed = OpcodeTestModel.fromJsonReferenceTest("frontier", "push32AndSuicide", model);
     System.out.println(mapper.writeValueAsString(parsed));

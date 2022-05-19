@@ -2,10 +2,11 @@ package org.eea.certification.evm;
 
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.bytes.Bytes32;
-import org.hyperledger.besu.datatypes.Wei;
-import org.hyperledger.besu.evm.frame.BlockValues;
 
 import java.util.Optional;
+
+import org.hyperledger.besu.datatypes.Wei;
+import org.hyperledger.besu.evm.frame.BlockValues;
 
 public class SettableBlockValues implements BlockValues {
 
@@ -16,7 +17,13 @@ public class SettableBlockValues implements BlockValues {
   private final long timestamp;
   private final Optional<Wei> baseFee;
 
-  public SettableBlockValues(Bytes difficulty, Bytes32 mixHash, long gasLimit, long number, long timestamp, Optional<Wei> baseFee) {
+  public SettableBlockValues(
+      Bytes difficulty,
+      Bytes32 mixHash,
+      long gasLimit,
+      long number,
+      long timestamp,
+      Optional<Wei> baseFee) {
     this.difficulty = difficulty;
     this.mixHash = mixHash;
     this.gasLimit = gasLimit;
