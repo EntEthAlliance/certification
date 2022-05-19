@@ -1,0 +1,32 @@
+name: test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    container:
+      image: 7.4.2-jdk17
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Cache Gradle packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+      - name: Cache Maven Repository
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/dependency-versions.gradle') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: gradle test
+        run: ./gradlew test
