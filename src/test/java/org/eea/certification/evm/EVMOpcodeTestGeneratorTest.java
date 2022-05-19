@@ -6,23 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.apache.tuweni.eth.EthJsonModule;
 
 import java.io.IOException;
-import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.Test;
 
 public class EVMOpcodeTestGeneratorTest {
-
-  @Test
-  void testGenerate() throws JsonProcessingException {
-    EVMOpcodeTestGenerator generator = new EVMOpcodeTestGenerator();
-    List<OpcodeTestModel> tests = generator.generateForAllHardForks(1);
-    ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-    mapper.registerModule(new JsonModule());
-    mapper.writerWithDefaultPrettyPrinter().writeValueAsString(tests.get(0x30));
-  }
 
   @Test
   void testTryRun() throws IOException {

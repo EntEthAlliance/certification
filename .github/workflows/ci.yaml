@@ -28,5 +28,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/dependency-versions.gradle') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: gradle check
+          run: ./gradlew check
       - name: gradle test
         run: ./gradlew test
