@@ -1,67 +1,65 @@
 ---
-operation:
-  name: "SDIV"
-  opcode: "0x05"
-gasPrice: "0x00000000000000000000000000000000000000000000000000000000000005ab"
-inputData: "0xb07b014e563f96581a5410e68becbeedcbf2eeb7e065b0fb3a7fffab3a356fc9e44a0175b95c9ef8219cdbe1d27bc64d"
-haltReason: "NONE"
+name: "SDIV"
+hardFork: "london"
+index: 3
 before:
   accounts:
-  - address: "0x8c5972df7919d7a248520654e532c27e6c360fb1"
-    balance: "0x289a"
+  - address: "0x3e616c9f2b3b8a4fca90d416df15a46b0450b279"
+    balance: "0x3667"
     code: "0x"
-    nonce: "0x6"
+    nonce: "0x12"
     storage: []
-  - address: "0x8889608204026bb32b1225d0018c9befd627b084"
-    balance: "0x8d"
+  - address: "0x947f70788ccf238f5d0ad1678837bdc792a869c3"
+    balance: "0x5871"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x2c"
     storage: []
-  - address: "0x47b51f497b4bbb0ddbd876bf88ff761357ded5a6"
-    balance: "0x313c"
+  - address: "0x8495f1203def5de0894945346d21a29ccd065591"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x14"
+    nonce: "0xd"
     storage: []
   memory: []
   stack:
-  - "0x6901aad7ab94ff6bd5da"
-  - "0x8b"
+  - "0x75ce6f1092617721d79c75ea02"
+  - "0x885cbed514"
 after:
   accounts:
-  - address: "0x8889608204026bb32b1225d0018c9befd627b084"
-    balance: "0x8d"
+  - address: "0x3e616c9f2b3b8a4fca90d416df15a46b0450b279"
+    balance: "0x3667"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x12"
     storage: []
-  - address: "0x8c5972df7919d7a248520654e532c27e6c360fb1"
-    balance: "0x289a"
+  - address: "0x8495f1203def5de0894945346d21a29ccd065591"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x6"
+    nonce: "0xd"
     storage: []
-  - address: "0x47b51f497b4bbb0ddbd876bf88ff761357ded5a6"
-    balance: "0x313c"
+  - address: "0x947f70788ccf238f5d0ad1678837bdc792a869c3"
+    balance: "0x5871"
     code: "0x"
-    nonce: "0x14"
+    nonce: "0x2c"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x0000000000000000000000000000000000000000000000c164aeac83d5a2d905"
+  - "0x000000000000000000000000000000000000000000000000dd29fe52ae7b504a"
+sender: "0x3e616c9f2b3b8a4fca90d416df15a46b0450b279"
+receiver: "0x8495f1203def5de0894945346d21a29ccd065591"
+inputData: "0x273b6cba9a20072e3b93c0df6f50d8c37c084fd117"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x64885cbed5146c75ce6f1092617721d79c75ea0205"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000003b50"
+gasUsed: "0x5"
 allGasUsed: "0xb"
+gasAvailable: "0x18b230aeb00"
+gasLimit: 3520000000000
+haltReason: "NONE"
+coinbase: "0x947f70788ccf238f5d0ad1678837bdc792a869c3"
+refunds: {}
+number: 624314195615312293
+timestamp: 2225883266962745780
+mixHashOrPrevRandao: "0x7a5c2cbd50b7fc52bb5f1b7a6222b0b6df38cb980c9866f8cd3e1f2360c673c5"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x608b696901aad7ab94ff6bd5da05"
-coinbase: "0x8889608204026bb32b1225d0018c9befd627b084"
-difficultyBytes: "0x1aea07f3ebcb27ada216e82fbbb52a47440384842113b47dbfda3d10f3e7323a"
-gasAvailable: "0xbde58c5c00"
-gasLimit: 7818000000000
-gasUsed: "0x5"
-hardFork: "london"
-mixHashOrPrevRandao: "0x7444bc5d08c07d03fd2e60cc14d894ea2639e38ca77ab2cdecdec307f4ee9caa"
-number: 9147555045164659148
-receiver: "0x47b51f497b4bbb0ddbd876bf88ff761357ded5a6"
-refunds: {}
-sender: "0x8c5972df7919d7a248520654e532c27e6c360fb1"
-timestamp: 2428591334473649827
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 3
+difficultyBytes: "0x740527851e86e166d15a01140517f5f68f02131635edd4341f5e18ddd1ed8545"

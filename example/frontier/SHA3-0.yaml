@@ -1,47 +1,44 @@
 ---
-operation:
-  name: "SHA3"
-  opcode: "0x20"
-gasPrice: "0x00000000000000000000000000000000000000000000000000000000000040d9"
-inputData: "0xaf77ed27b1803c29b038ddd6347e57745fd7c01113d8534322c2880178afbdecaf365e4cefd384cc4648410dd5e092e248f35a"
-haltReason: "NONE"
+name: "SHA3"
+hardFork: "frontier"
+index: 0
 before:
   accounts:
-  - address: "0x3c3d299ed83ffb6e1d088d4a3bc1346468920a2c"
+  - address: "0x22def2f8cd4aa30b71a7d1844db2faad2ec3126e"
+    balance: "0x2d1b"
+    code: "0x"
+    nonce: "0x11"
+    storage: []
+  - address: "0xbcb718cd3cac7d1663a7e4dc82cb1c06aa114ab5"
+    balance: "0x57ca"
+    code: "0x"
+    nonce: "0x58"
+    storage: []
+  - address: "0x5c714de88f7b43d1f65a34d456912ff0364bc645"
     balance: "0x0"
     code: "0x"
-    nonce: "0xd"
-    storage: []
-  - address: "0xf10b4a24ae3d8f6bf1e6131ea5e9b1667d465eaf"
-    balance: "0x68c0"
-    code: "0x"
-    nonce: "0x61"
-    storage: []
-  - address: "0x549a231ebd253f18b67036171dfa99be0b518ced"
-    balance: "0x770a"
-    code: "0x"
-    nonce: "0x16"
+    nonce: "0x17"
     storage: []
   memory: []
   stack:
-  - "0xce"
-  - "0x7f"
+  - "0xa7"
+  - "0x0d"
 after:
   accounts:
-  - address: "0x3c3d299ed83ffb6e1d088d4a3bc1346468920a2c"
+  - address: "0xbcb718cd3cac7d1663a7e4dc82cb1c06aa114ab5"
+    balance: "0x57ca"
+    code: "0x"
+    nonce: "0x58"
+    storage: []
+  - address: "0x5c714de88f7b43d1f65a34d456912ff0364bc645"
     balance: "0x0"
     code: "0x"
-    nonce: "0xd"
+    nonce: "0x17"
     storage: []
-  - address: "0x549a231ebd253f18b67036171dfa99be0b518ced"
-    balance: "0x770a"
+  - address: "0x22def2f8cd4aa30b71a7d1844db2faad2ec3126e"
+    balance: "0x2d1b"
     code: "0x"
-    nonce: "0x16"
-    storage: []
-  - address: "0xf10b4a24ae3d8f6bf1e6131ea5e9b1667d465eaf"
-    balance: "0x68c0"
-    code: "0x"
-    nonce: "0x61"
+    nonce: "0x11"
     storage: []
   logs: []
   memory:
@@ -51,28 +48,24 @@ after:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack:
-  - "0x8f2973927e9a384995ed617fbe50d664787eec94a4525f9fb33a2c340fda22e3"
-allGasUsed: "0x5d"
+  - "0x3184fc86524b0495db56f434fba34e478911db355cbb44815e987625ab42e557"
+sender: "0x22def2f8cd4aa30b71a7d1844db2faad2ec3126e"
+receiver: "0x5c714de88f7b43d1f65a34d456912ff0364bc645"
+inputData: "0x6b174e"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x600d60a720"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000c04"
+gasUsed: "0x36"
+allGasUsed: "0x3c"
+gasAvailable: "0x10d56a73000"
+gasLimit: 8201000000000
+haltReason: "NONE"
+coinbase: "0xbcb718cd3cac7d1663a7e4dc82cb1c06aa114ab5"
+refunds: {}
+number: 8236029513803402899
+timestamp: 6582469883085068516
+mixHashOrPrevRandao: "0x3228fa85270a5cafc3510e396bb1f5193845161890570cec12017ff13400bbc7"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x607f60ce20"
-coinbase: "0xf10b4a24ae3d8f6bf1e6131ea5e9b1667d465eaf"
-difficultyBytes: "0xeb01db579f020c4eaabb803793a4ae98c2c1d6e5a8d66c8ee767c7a2d15b75b9"
-gasAvailable: "0x10642ac00"
-gasLimit: 1599000000000
-gasUsed: "0x57"
-hardFork: "frontier"
-mixHashOrPrevRandao: "0xa8286be4969138b96679719f75389bb86fcd1aa9543805af23a7103e508f49c3"
-number: 8578931671671695939
-receiver: "0x549a231ebd253f18b67036171dfa99be0b518ced"
-refunds: {}
-sender: "0x3c3d299ed83ffb6e1d088d4a3bc1346468920a2c"
-timestamp: 2886280463671294375
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 0
+difficultyBytes: "0xd70b1c72e949668b9015cf7edcb925b462de590d281ed2afaac038a87dabf544"

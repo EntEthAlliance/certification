@@ -1,68 +1,66 @@
 ---
-operation:
-  name: "SSTORE"
-  opcode: "0x55"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x6d15325902884d4f6df5a7a6384686b02f96ec7dc8b175fc1e48bac5414796e48b8b01793345ac50d63772ee61810a58782d6747d36a"
-haltReason: "NONE"
+name: "SSTORE"
+hardFork: "byzantium"
+index: 2
 before:
   accounts:
-  - address: "0xf4438bb07bde92b92873025836027ed70c62f90c"
-    balance: "0x14dc"
+  - address: "0x16462c1ece1dabd624af51b939e31933e56c7696"
+    balance: "0x7667"
     code: "0x"
-    nonce: "0x6"
+    nonce: "0xb"
     storage: []
-  - address: "0xed0ea7668a5194cc9ae793e49e5cde29228edb12"
-    balance: "0x6961"
+  - address: "0x4c0756a469e0e1f018026df53e8f5fceaf828886"
+    balance: "0x671f"
     code: "0x"
-    nonce: "0x61"
+    nonce: "0x31"
     storage: []
-  - address: "0x1f304c1e3b6a7a0489ab1366f1c7650695186065"
-    balance: "0x5331"
+  - address: "0x8fa00805ce2a99f4e589f5fdf7869a551a01a8ce"
+    balance: "0x0"
     code: "0x"
-    nonce: "0xe"
+    nonce: "0xa"
     storage: []
   memory: []
   stack:
-  - "0xa75a3321cf7d8a5d77f6557915918ea1"
-  - "0x5924e1940aafba8954828e17e73a32157f7b7c0df682cfb2b7"
+  - "0x0ed4e037d4e23e13078a50bae991af58d3"
+  - "0x2e914cc9e51918528785b548c359f52b5004cf44ea772ca59dccec477034"
 after:
   accounts:
-  - address: "0xed0ea7668a5194cc9ae793e49e5cde29228edb12"
-    balance: "0x6961"
+  - address: "0x16462c1ece1dabd624af51b939e31933e56c7696"
+    balance: "0x7667"
     code: "0x"
-    nonce: "0x61"
+    nonce: "0xb"
     storage: []
-  - address: "0x1f304c1e3b6a7a0489ab1366f1c7650695186065"
-    balance: "0x5331"
+  - address: "0x4c0756a469e0e1f018026df53e8f5fceaf828886"
+    balance: "0x671f"
     code: "0x"
-    nonce: "0xe"
+    nonce: "0x31"
+    storage: []
+  - address: "0x8fa00805ce2a99f4e589f5fdf7869a551a01a8ce"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0xa"
     storage:
-    - key: "0x00000000000000000000000000000000a75a3321cf7d8a5d77f6557915918ea1"
-      value: "0x000000000000005924e1940aafba8954828e17e73a32157f7b7c0df682cfb2b7"
-  - address: "0xf4438bb07bde92b92873025836027ed70c62f90c"
-    balance: "0x14dc"
-    code: "0x"
-    nonce: "0x6"
-    storage: []
+    - key: "0x0000000000000000000000000000000ed4e037d4e23e13078a50bae991af58d3"
+      value: "0x00002e914cc9e51918528785b548c359f52b5004cf44ea772ca59dccec477034"
   logs: []
   memory: []
   stack: []
+sender: "0x16462c1ece1dabd624af51b939e31933e56c7696"
+receiver: "0x8fa00805ce2a99f4e589f5fdf7869a551a01a8ce"
+inputData: "0xa91657c84de25e9feeb5ce7b3bc2353b057fa12625d0d3f8e92933c645dd877d95cc72512bf1a32fd2"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x7d2e914cc9e51918528785b548c359f52b5004cf44ea772ca59dccec477034700ed4e037d4e23e13078a50bae991af58d355"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x4e20"
 allGasUsed: "0x4e26"
+gasAvailable: "0x8d89a9df00"
+gasLimit: 6419000000000
+haltReason: "NONE"
+coinbase: "0x4c0756a469e0e1f018026df53e8f5fceaf828886"
+refunds: {}
+number: 3390902920424841470
+timestamp: 4493699955965759978
+mixHashOrPrevRandao: "0x91356eaacdc7cc5fc1461c751f61afbed8089002eb401f14bad1a3c577039ff9"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x785924e1940aafba8954828e17e73a32157f7b7c0df682cfb2b76fa75a3321cf7d8a5d77f6557915918ea155"
-coinbase: "0xed0ea7668a5194cc9ae793e49e5cde29228edb12"
-difficultyBytes: "0x55ef357908c534213aecbe686593391b70777626ad18ba9dadbf261ff5639296"
-gasAvailable: "0x2977965500"
-gasLimit: 3289500000000
-gasUsed: "0x4e20"
-hardFork: "byzantium"
-mixHashOrPrevRandao: "0xa0f6c7c52d0a5307041a9880f97696aa7a8b7a012ac297d87d9862d5ac026182"
-number: 3274927917516163235
-receiver: "0x1f304c1e3b6a7a0489ab1366f1c7650695186065"
-refunds: {}
-sender: "0xf4438bb07bde92b92873025836027ed70c62f90c"
-timestamp: 2039901383414775219
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 2
+difficultyBytes: "0xc5900b49df27c53352752a295d91f093ef2e5bf0329b112af37e50c30e2e725b"

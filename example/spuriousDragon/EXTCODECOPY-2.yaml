@@ -1,49 +1,46 @@
 ---
-operation:
-  name: "EXTCODECOPY"
-  opcode: "0x3c"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000006a7a"
-inputData: "0xa4df214bcfab7f7f654f7c96"
-haltReason: "NONE"
+name: "EXTCODECOPY"
+hardFork: "spuriousDragon"
+index: 2
 before:
   accounts:
-  - address: "0x247d8ddaf60fd5821e92802439da1b095e30a97d"
-    balance: "0x27b1"
+  - address: "0xa9d706373800079b8700e0d8ca4116e5d34073fe"
+    balance: "0x610e"
     code: "0x"
-    nonce: "0x18"
+    nonce: "0x25"
     storage: []
-  - address: "0x630b91959fd2c13c8d6e8dd6d2255e4d9a2695e7"
-    balance: "0x714a"
+  - address: "0x15fbe265b1deabb38f8ec341e6eb8b71d6ff952d"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x5a"
+    nonce: "0x2a"
     storage: []
-  - address: "0x7218fae3db9535bd5f1fd10ed6b8f4e4023c3092"
-    balance: "0x70f"
+  - address: "0x540a35cc88df80cd20777c8a7c1d276f262cd56e"
+    balance: "0x7464"
     code: "0x"
-    nonce: "0x"
+    nonce: "0xf"
     storage: []
   memory: []
   stack:
-  - "0x31ee086f73"
-  - "0x40"
-  - "0x82e634b58d1dbb0bfd0839c827d68bc287f7802e4288d8268d7a"
-  - "0x9f"
+  - "0x34db040829325405728e79"
+  - "0x2d"
+  - "0x9c6fb715e697"
+  - "0xfd"
 after:
   accounts:
-  - address: "0x630b91959fd2c13c8d6e8dd6d2255e4d9a2695e7"
-    balance: "0x714a"
+  - address: "0xa9d706373800079b8700e0d8ca4116e5d34073fe"
+    balance: "0x610e"
     code: "0x"
-    nonce: "0x5a"
+    nonce: "0x25"
     storage: []
-  - address: "0x247d8ddaf60fd5821e92802439da1b095e30a97d"
-    balance: "0x27b1"
+  - address: "0x15fbe265b1deabb38f8ec341e6eb8b71d6ff952d"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x18"
+    nonce: "0x2a"
     storage: []
-  - address: "0x7218fae3db9535bd5f1fd10ed6b8f4e4023c3092"
-    balance: "0x70f"
+  - address: "0x540a35cc88df80cd20777c8a7c1d276f262cd56e"
+    balance: "0x7464"
     code: "0x"
-    nonce: "0x"
+    nonce: "0xf"
     storage: []
   logs: []
   memory:
@@ -54,22 +51,26 @@ after:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0x2ec"
+sender: "0xa9d706373800079b8700e0d8ca4116e5d34073fe"
+receiver: "0x540a35cc88df80cd20777c8a7c1d276f262cd56e"
+inputData: "0x93cb9f47afb36748d71ae454f9f90a94cbe2b4205c787a07ab0ad2ec59a3d710d9658474000120732e3024b5e70fe666"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x60fd659c6fb715e697602d6a34db040829325405728e793c"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x2f2"
+allGasUsed: "0x2fe"
+gasAvailable: "0x1371bb9f200"
+gasLimit: 5114000000000
+haltReason: "NONE"
+coinbase: "0x15fbe265b1deabb38f8ec341e6eb8b71d6ff952d"
+refunds: {}
+number: 8450209921754732014
+timestamp: 8673547190024768019
+mixHashOrPrevRandao: "0x105a263a72cd20a41954a96be7e0b687844a13a607f2c3d8264145baec8a090c"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x609f7982e634b58d1dbb0bfd0839c827d68bc287f7802e4288d8268d7a60406431ee086f733c"
-coinbase: "0x630b91959fd2c13c8d6e8dd6d2255e4d9a2695e7"
-difficultyBytes: "0xf97636da31de55fe9c76510b452890111b7dc66f1d057e4ff2ddaf4818dacdca"
-gasAvailable: "0x14ecf7aac00"
-gasLimit: 3058500000000
-gasUsed: "0x2e0"
-hardFork: "spuriousDragon"
-mixHashOrPrevRandao: "0x2ee2cbd535ac0ca293a1802b1d5c497a85716dbef72cd5318a56510f96674e5f"
-number: 4088313161675876418
-receiver: "0x7218fae3db9535bd5f1fd10ed6b8f4e4023c3092"
-refunds: {}
-sender: "0x247d8ddaf60fd5821e92802439da1b095e30a97d"
-timestamp: 1867199788864275937
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 2
+difficultyBytes: "0xa3a3154a7e47b11bf87837e2b833525773017c1c0cd1de6425b14b99c594e851"

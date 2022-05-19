@@ -281,7 +281,9 @@ public class EVMOpcodeTestGenerator {
     Deque<MessageFrame> messageFrameStack = new ArrayDeque<>();
     SimpleWorld worldUpdater = new SimpleWorld();
 
+    List<Account> pre = new ArrayList<>();
     for (Account acct : model.getBefore().getAccounts()) {
+      pre.add(acct);
       worldUpdater.createAccount(acct.getAddress(), acct.getNonce(), acct.getBalance());
     }
 
@@ -317,13 +319,7 @@ public class EVMOpcodeTestGenerator {
     if (memoryAfter.size() > 128) {
       return null;
     }
-    List<Account> pre = new ArrayList<>();
-    pre.add(worldUpdater.get(sender));
-    Account coinbaseAccount = worldUpdater.get(coinbase);
-    if (coinbaseAccount != null) {
-      pre.add(coinbaseAccount);
-    }
-    pre.add(worldUpdater.get(receiver));
+
     Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
     OpcodeTestModel result = new OpcodeTestModel(executor.getHardFork(), pre, model.getName(), stackAfter, memoryAfter, new ArrayList<>(), new ArrayList<>(), initialMessageFrame.getInputData(), initialMessageFrame.getGasPrice(), initialMessageFrame.getLogs(), gasAvailable, Optional.empty(), allGasCost, initialMessageFrame.getRefunds(), haltReason, worldUpdater.getTouchedAccounts(), blockValues, sender, receiver, value, model.getCode(), coinbase, UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));

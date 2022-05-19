@@ -1,67 +1,70 @@
 ---
-operation:
-  name: "CALLDATACOPY"
-  opcode: "0x37"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000003662"
-inputData: "0x53f353ccaf243d598ce78e5569e4d25e9b06"
-haltReason: "NONE"
+name: "CALLDATACOPY"
+hardFork: "tangerineWhistle"
+index: 4
 before:
   accounts:
-  - address: "0x50f2e572ae8782d48c80a49a42ed1761a96fc290"
+  - address: "0xc535d41a1e51b45b5bde854e7d272d12b9284577"
+    balance: "0xe7c"
+    code: "0x"
+    nonce: "0x22"
+    storage: []
+  - address: "0xacccb4f2d901e8d3f214ca1b0da992420eb3cdd7"
+    balance: "0x1798"
+    code: "0x"
+    nonce: "0x23"
+    storage: []
+  - address: "0xe7154da8dd78f0bb9ad8a6bc82b9d8a68edf1fb0"
     balance: "0x0"
     code: "0x"
-    nonce: "0x2a"
-    storage: []
-  - address: "0x333d347a953f5f5c2bf1052052238e72f6cc08cf"
-    balance: "0x56f6"
-    code: "0x"
-    nonce: "0x27"
-    storage: []
-  - address: "0xea2d97dfdda45d65b5b4004835ac5b01ce5cc481"
-    balance: "0x72e5"
-    code: "0x"
-    nonce: "0x11"
+    nonce: "0xd"
     storage: []
   memory: []
   stack:
-  - "0xe1ef147f92d4e369d527e309438c1d9e35adbdfec1874aee82a1d611f3649ea9"
-  - "0x413d89d67fd581506064"
-  - "0x00"
+  - "0x45"
+  - "0x2a96b18fbef5cc8ad65c80573cdceb750ba0012bb25ba032f81317c1"
+  - "0x46"
 after:
   accounts:
-  - address: "0x50f2e572ae8782d48c80a49a42ed1761a96fc290"
-    balance: "0x0"
+  - address: "0xc535d41a1e51b45b5bde854e7d272d12b9284577"
+    balance: "0x79d"
     code: "0x"
-    nonce: "0x2a"
+    nonce: "0x22"
     storage: []
-  - address: "0xea2d97dfdda45d65b5b4004835ac5b01ce5cc481"
-    balance: "0x72e5"
+  - address: "0xe7154da8dd78f0bb9ad8a6bc82b9d8a68edf1fb0"
+    balance: "0x6df"
     code: "0x"
-    nonce: "0x11"
+    nonce: "0xd"
     storage: []
-  - address: "0x333d347a953f5f5c2bf1052052238e72f6cc08cf"
-    balance: "0x56f6"
+  - address: "0xacccb4f2d901e8d3f214ca1b0da992420eb3cdd7"
+    balance: "0x1798"
     code: "0x"
-    nonce: "0x27"
+    nonce: "0x23"
     storage: []
   logs: []
-  memory: []
+  memory:
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0xc"
+sender: "0xc535d41a1e51b45b5bde854e7d272d12b9284577"
+receiver: "0xe7154da8dd78f0bb9ad8a6bc82b9d8a68edf1fb0"
+inputData: "0x7263aa1d7c13d34c265313a7e08486cb756db6cef3084206727b0fabf916e1299858a9ebd406d78484a69a6a348cd7"
+value: "0x00000000000000000000000000000000000000000000000000000000000006df"
+code: "0x60467b2a96b18fbef5cc8ad65c80573cdceb750ba0012bb25ba032f81317c1604537"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000006220"
+gasUsed: "0x1b"
+allGasUsed: "0x24"
+gasAvailable: "0x641dff4c00"
+gasLimit: 1073000000000
+haltReason: "NONE"
+coinbase: "0xacccb4f2d901e8d3f214ca1b0da992420eb3cdd7"
+refunds: {}
+number: 3897158853753760468
+timestamp: 6546202163838222344
+mixHashOrPrevRandao: "0xf1e1d2b06aa47698cb3f8bb97fd956f7c09f46f6034bb51e26bc3de705cec446"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x600069413d89d67fd5815060647fe1ef147f92d4e369d527e309438c1d9e35adbdfec1874aee82a1d611f3649ea937"
-coinbase: "0x333d347a953f5f5c2bf1052052238e72f6cc08cf"
-difficultyBytes: "0xfaba09d8248654c2a65f945c87bafad51917a6b4648a3ff96204f77b8325dadd"
-gasAvailable: "0x123692c6400"
-gasLimit: 5134000000000
-gasUsed: "0x3"
-hardFork: "tangerineWhistle"
-mixHashOrPrevRandao: "0x7a14c0ddfb081ae4d704ea33d4b809e558cfa6b2db57b17d563656b92ca3ed53"
-number: 2019387455894621855
-receiver: "0xea2d97dfdda45d65b5b4004835ac5b01ce5cc481"
-refunds: {}
-sender: "0x50f2e572ae8782d48c80a49a42ed1761a96fc290"
-timestamp: 3935173998372769289
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 4
+difficultyBytes: "0x9526fa9271efdf27fdf73e82e5bcc9d3b4707aa881d0f52582d4ae87b29bb392"

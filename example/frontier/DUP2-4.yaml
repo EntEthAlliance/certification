@@ -1,69 +1,67 @@
 ---
-operation:
-  name: "DUP2"
-  opcode: "0x81"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x683682924f070a3d0c98c6dfeaa6dcae25"
-haltReason: "NONE"
+name: "DUP2"
+hardFork: "frontier"
+index: 4
 before:
   accounts:
-  - address: "0x0ad8044352291a8f7c09b593202d55ba5a5bc8ef"
-    balance: "0x5f29"
-    code: "0x"
-    nonce: "0xb"
-    storage: []
-  - address: "0xc0b7cd68652027ae0dc6cc4483eda16f1700bf2e"
-    balance: "0x50f3"
-    code: "0x"
-    nonce: "0x27"
-    storage: []
-  - address: "0x2a5f1f8af5664855c4a25997f9ea17eb1061e48b"
+  - address: "0x71e8da37e60f5702129643e5090582339b209766"
     balance: "0x0"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x2a"
+    storage: []
+  - address: "0x6949f158309161b58099cff96d9c6dc68be5bc10"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0x35"
+    storage: []
+  - address: "0x4523b54b3dd7d71faa5ac866479061fa5f3d4a4c"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0xd"
     storage: []
   memory: []
   stack:
-  - "0x60236d948b3e05cc88d2f392b49e2e7f7157b03d6bcce99ec2bbb2"
-  - "0xea8c3cae4e7726b9ce2e2303565a7d5640e1ef1e2b3ae8f86fc6acb0"
+  - "0x958c2cacc2b64e006ca1ce3f67d8ee2f99c4d0e3d49545609f41615091c25135"
+  - "0xdc9729c6a905a26e0da4d648ccb5a23c958fcef6d48cecd9e08af267"
 after:
   accounts:
-  - address: "0x0ad8044352291a8f7c09b593202d55ba5a5bc8ef"
-    balance: "0x1b5f"
+  - address: "0x4523b54b3dd7d71faa5ac866479061fa5f3d4a4c"
+    balance: "0x0"
     code: "0x"
-    nonce: "0xb"
+    nonce: "0xd"
     storage: []
-  - address: "0xc0b7cd68652027ae0dc6cc4483eda16f1700bf2e"
-    balance: "0x50f3"
+  - address: "0x71e8da37e60f5702129643e5090582339b209766"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x27"
+    nonce: "0x2a"
     storage: []
-  - address: "0x2a5f1f8af5664855c4a25997f9ea17eb1061e48b"
-    balance: "0x43ca"
+  - address: "0x6949f158309161b58099cff96d9c6dc68be5bc10"
+    balance: "0x0"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x35"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0xea8c3cae4e7726b9ce2e2303565a7d5640e1ef1e2b3ae8f86fc6acb0"
-  - "0x60236d948b3e05cc88d2f392b49e2e7f7157b03d6bcce99ec2bbb2"
-  - "0xea8c3cae4e7726b9ce2e2303565a7d5640e1ef1e2b3ae8f86fc6acb0"
+  - "0xdc9729c6a905a26e0da4d648ccb5a23c958fcef6d48cecd9e08af267"
+  - "0x958c2cacc2b64e006ca1ce3f67d8ee2f99c4d0e3d49545609f41615091c25135"
+  - "0xdc9729c6a905a26e0da4d648ccb5a23c958fcef6d48cecd9e08af267"
+sender: "0x71e8da37e60f5702129643e5090582339b209766"
+receiver: "0x4523b54b3dd7d71faa5ac866479061fa5f3d4a4c"
+inputData: "0x6cb05f000ed3a473"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x7bdc9729c6a905a26e0da4d648ccb5a23c958fcef6d48cecd9e08af2677f958c2cacc2b64e006ca1ce3f67d8ee2f99c4d0e3d49545609f41615091c2513581"
+gasPrice: "0x00000000000000000000000000000000000000000000000000000000000071eb"
+gasUsed: "0x3"
 allGasUsed: "0x9"
+gasAvailable: "0x787d675700"
+gasLimit: 2817000000000
+haltReason: "NONE"
+coinbase: "0x6949f158309161b58099cff96d9c6dc68be5bc10"
+refunds: {}
+number: 6350724483397250722
+timestamp: 1206253374746947310
+mixHashOrPrevRandao: "0x0db8837c14fd15a85a80de286f84bc0014dd4dbc05fcef9bbbb2545cfe8398dc"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x7bea8c3cae4e7726b9ce2e2303565a7d5640e1ef1e2b3ae8f86fc6acb07a60236d948b3e05cc88d2f392b49e2e7f7157b03d6bcce99ec2bbb281"
-coinbase: "0xc0b7cd68652027ae0dc6cc4483eda16f1700bf2e"
-difficultyBytes: "0xe62c105daff87bc69ffbdb2d000b53b05e9b0a42234ff5a3e996560fc8e73e09"
-gasAvailable: "0x1704aa08a00"
-gasLimit: 2093000000000
-gasUsed: "0x3"
-hardFork: "frontier"
-mixHashOrPrevRandao: "0x70a9f253ff17dcd99b9256d3ae4c69432dae17d12632ad73d5a9cbba362560fb"
-number: 1919620854492076905
-receiver: "0x2a5f1f8af5664855c4a25997f9ea17eb1061e48b"
-refunds: {}
-sender: "0x0ad8044352291a8f7c09b593202d55ba5a5bc8ef"
-timestamp: 6171031126170795566
-value: "0x00000000000000000000000000000000000000000000000000000000000043ca"
-index: 4
+difficultyBytes: "0x6359ed2550d7afd9ed459d801ffdd6075649e9537e29f3f0b2bb88316d6f3a92"

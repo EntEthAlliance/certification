@@ -1,68 +1,72 @@
 ---
-operation:
-  name: "EXTCODECOPY"
-  opcode: "0x3c"
-gasPrice: "0x00000000000000000000000000000000000000000000000000000000000048b6"
-inputData: "0x8691cadd13061cb100845e42c24d9865be37b9f95c685eda2b"
-haltReason: "NONE"
+name: "EXTCODECOPY"
+hardFork: "premerge"
+index: 2
 before:
   accounts:
-  - address: "0x9a6a647dc2b746d51d7acf4406cfef033b792bb2"
+  - address: "0x453489abb76bdba5558af71f1084998fdefe53f8"
+    balance: "0x216c"
+    code: "0x"
+    nonce: "0x10"
+    storage: []
+  - address: "0xb423e242ed1a0708bb598ea16f43a63a60767512"
     balance: "0x0"
     code: "0x"
-    nonce: "0x23"
+    nonce: "0x53"
     storage: []
-  - address: "0x60186d0548774138cef55f625ab9ffde7b3ff8b3"
-    balance: "0xae4"
+  - address: "0x94a14e1dbbf156e4d8101157fe0b6c2c273ae6e4"
+    balance: "0x1955"
     code: "0x"
-    nonce: "0xf"
-    storage: []
-  - address: "0x83bc02dc47fe57697a3cadc5d527784972fcecd0"
-    balance: "0x2bfa"
-    code: "0x"
-    nonce: "0xb"
+    nonce: "0x17"
     storage: []
   memory: []
   stack:
-  - "0x21d195feeb7767f99507d429770cf5aece55d546"
-  - "0xfa6d5b6012b98508a6a50ef847"
-  - "0xd44a4153188b47c26e6b9f6fdab410965ad758eee6ec102ff8"
-  - "0x00"
+  - "0xa670a005d97d"
+  - "0x60"
+  - "0x2d73db4863b4ce3f0646a5f7f72136c5b909ae"
+  - "0x48"
 after:
   accounts:
-  - address: "0x83bc02dc47fe57697a3cadc5d527784972fcecd0"
-    balance: "0x2bfa"
-    code: "0x"
-    nonce: "0xb"
-    storage: []
-  - address: "0x9a6a647dc2b746d51d7acf4406cfef033b792bb2"
+  - address: "0xb423e242ed1a0708bb598ea16f43a63a60767512"
     balance: "0x0"
     code: "0x"
-    nonce: "0x23"
+    nonce: "0x53"
     storage: []
-  - address: "0x60186d0548774138cef55f625ab9ffde7b3ff8b3"
-    balance: "0xae4"
+  - address: "0x453489abb76bdba5558af71f1084998fdefe53f8"
+    balance: "0x216c"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x10"
+    storage: []
+  - address: "0x94a14e1dbbf156e4d8101157fe0b6c2c273ae6e4"
+    balance: "0x1955"
+    code: "0x"
+    nonce: "0x17"
     storage: []
   logs: []
-  memory: []
+  memory:
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0xa34"
+sender: "0x453489abb76bdba5558af71f1084998fdefe53f8"
+receiver: "0x94a14e1dbbf156e4d8101157fe0b6c2c273ae6e4"
+inputData: "0xc528025435afbb"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x6048722d73db4863b4ce3f0646a5f7f72136c5b909ae606065a670a005d97d3c"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0xa43"
+allGasUsed: "0xa4f"
+gasAvailable: "0x2664ce5100"
+gasLimit: 4894500000000
+haltReason: "NONE"
+coinbase: "0xb423e242ed1a0708bb598ea16f43a63a60767512"
+refunds: {}
+number: 2041056499591399132
+timestamp: 6701311569168551497
+mixHashOrPrevRandao: "0x1fa63f905b284425da2c833ab9519b90bf10be835f3bee8127ecab24433790e1"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x600078d44a4153188b47c26e6b9f6fdab410965ad758eee6ec102ff86cfa6d5b6012b98508a6a50ef8477321d195feeb7767f99507d429770cf5aece55d5463c"
-coinbase: "0x60186d0548774138cef55f625ab9ffde7b3ff8b3"
-difficultyBytes: "0x6138c28f26c4f0e74ec490faffee2981d1576c04a69a87d8a9b567d4884a8042"
-gasAvailable: "0xe11fbb2500"
-gasLimit: 3495500000000
-gasUsed: "0xa28"
-hardFork: "premerge"
-mixHashOrPrevRandao: "0x7591ce85b7e4a744d584df31a5df860f520f999ef8bf3d5b8ba1fb662a95ea8a"
-number: 2100191439945428986
-receiver: "0x83bc02dc47fe57697a3cadc5d527784972fcecd0"
-refunds: {}
-sender: "0x9a6a647dc2b746d51d7acf4406cfef033b792bb2"
-timestamp: 1204736846087013983
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 2
+difficultyBytes: "0xba6f9cd24ee48ac01fbbcb2941ac673362e241141f1354a0b7a1f486c4e96c6c"

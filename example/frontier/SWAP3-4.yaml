@@ -1,72 +1,70 @@
 ---
-operation:
-  name: "SWAP3"
-  opcode: "0x92"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000001aed"
-inputData: "0x075273faa3e537fc48c68166b28ac0a36b93c2721ec633f1c42aff164f570c80bd1336e2f67b9a17c8edc3abbbdf7b11dc017604f74f72dba55e95"
-haltReason: "NONE"
+name: "SWAP3"
+hardFork: "frontier"
+index: 4
 before:
   accounts:
-  - address: "0xfaa41098399cd8b5168a2066b90c0bae9b54d013"
+  - address: "0xb30ca472ac64287495c41fa3749b84f489008ecf"
+    balance: "0xfa5"
+    code: "0x"
+    nonce: "0xd"
+    storage: []
+  - address: "0xd3f7c725386a1b2bd1fd573e7478e90c0c548976"
+    balance: "0x3f58"
+    code: "0x"
+    nonce: "0x2d"
+    storage: []
+  - address: "0x5ef57580d63928b9420b84623ed3ee538875f217"
     balance: "0x0"
     code: "0x"
-    nonce: "0x25"
-    storage: []
-  - address: "0x65b74b24f0ee70976feb89873b380cf65889f256"
-    balance: "0x64e8"
-    code: "0x"
-    nonce: "0x34"
-    storage: []
-  - address: "0x65841c1493d4b10118bcd8b33262925bd26fe0c3"
-    balance: "0x15b7"
-    code: "0x"
-    nonce: "0x15"
+    nonce: "0x12"
     storage: []
   memory: []
   stack:
-  - "0x3da8833eece159c565e61eabeb"
-  - "0xa3960354fecf5213d36c6da33a"
-  - "0x2c6c6aa9fa7f2eada7"
-  - "0x15734b258cb00b955a18225dd562fd8e363076633382786972a7d0b4"
+  - "0x8ed46d999ba17c5460c1b0ca812891ca162d8b09971572fb"
+  - "0x7fd1cd"
+  - "0xb75f2477070279bf26b7c96a"
+  - "0x20"
 after:
   accounts:
-  - address: "0x65841c1493d4b10118bcd8b33262925bd26fe0c3"
-    balance: "0x15b7"
+  - address: "0xd3f7c725386a1b2bd1fd573e7478e90c0c548976"
+    balance: "0x3f58"
     code: "0x"
-    nonce: "0x15"
+    nonce: "0x2d"
     storage: []
-  - address: "0x65b74b24f0ee70976feb89873b380cf65889f256"
-    balance: "0x64e8"
+  - address: "0xb30ca472ac64287495c41fa3749b84f489008ecf"
+    balance: "0xfa5"
     code: "0x"
-    nonce: "0x34"
+    nonce: "0xd"
     storage: []
-  - address: "0xfaa41098399cd8b5168a2066b90c0bae9b54d013"
+  - address: "0x5ef57580d63928b9420b84623ed3ee538875f217"
     balance: "0x0"
     code: "0x"
-    nonce: "0x25"
+    nonce: "0x12"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x15734b258cb00b955a18225dd562fd8e363076633382786972a7d0b4"
-  - "0xa3960354fecf5213d36c6da33a"
-  - "0x2c6c6aa9fa7f2eada7"
-  - "0x3da8833eece159c565e61eabeb"
+  - "0x20"
+  - "0x7fd1cd"
+  - "0xb75f2477070279bf26b7c96a"
+  - "0x8ed46d999ba17c5460c1b0ca812891ca162d8b09971572fb"
+sender: "0xb30ca472ac64287495c41fa3749b84f489008ecf"
+receiver: "0x5ef57580d63928b9420b84623ed3ee538875f217"
+inputData: "0x94a2004cfa1f4d2abd09cb5c900f8383e21b454a9c8977546fdc7ba28101a78484ad7b0a041fb11597ad69817e657c8171f6dd33024360011610586c"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x60206bb75f2477070279bf26b7c96a627fd1cd778ed46d999ba17c5460c1b0ca812891ca162d8b09971572fb92"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x3"
 allGasUsed: "0xf"
+gasAvailable: "0xb9259d1000"
+gasLimit: 922000000000
+haltReason: "NONE"
+coinbase: "0xd3f7c725386a1b2bd1fd573e7478e90c0c548976"
+refunds: {}
+number: 4713687454874182064
+timestamp: 5140883209866110578
+mixHashOrPrevRandao: "0xf3b0feccf7a749418de0175e19574607462553a744fc1e6956876417dd79e6db"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x7b15734b258cb00b955a18225dd562fd8e363076633382786972a7d0b4682c6c6aa9fa7f2eada76ca3960354fecf5213d36c6da33a6c3da8833eece159c565e61eabeb92"
-coinbase: "0x65b74b24f0ee70976feb89873b380cf65889f256"
-difficultyBytes: "0x04cd32b5ebe8f59eb6fa02c4f356850132a9a586d25ddb9bdc666b1b1512671d"
-gasAvailable: "0xd5994d1600"
-gasLimit: 2122500000000
-gasUsed: "0x3"
-hardFork: "frontier"
-mixHashOrPrevRandao: "0x266c3aeb0ac5b20bc488a568e8ad73dc96f7c34d2539a9f7d2b32e52a83a2d38"
-number: 4942941048783875418
-receiver: "0x65841c1493d4b10118bcd8b33262925bd26fe0c3"
-refunds: {}
-sender: "0xfaa41098399cd8b5168a2066b90c0bae9b54d013"
-timestamp: 4640980385103038456
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 4
+difficultyBytes: "0xe8f1869eeb66eeaf9a5dc71dbc9d8a5afc69978b45ca3a2cefc6d4debd846246"

@@ -1,70 +1,68 @@
 ---
-operation:
-  name: "SWAP2"
-  opcode: "0x91"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x7cb3cf8f886328246d3fa41b7923285c378af06712bd68d17cbcfdb5"
-haltReason: "NONE"
+name: "SWAP2"
+hardFork: "byzantium"
+index: 0
 before:
   accounts:
-  - address: "0x7cdedf899de1137942a44c42642342889effb56f"
-    balance: "0x6b77"
-    code: "0x"
-    nonce: "0x1e"
-    storage: []
-  - address: "0x23958517cf9071d453f09a2e2af5a84d535fd15e"
-    balance: "0x44ab"
-    code: "0x"
-    nonce: "0x23"
-    storage: []
-  - address: "0x4229188c65383399f9f2141fa3088f88ee32d239"
+  - address: "0x85e13894371f248238c1cbf627d6f3eefc3f5768"
     balance: "0x0"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x14"
+    storage: []
+  - address: "0x5001426d6f3ffa599a73ff5992b2bdcb2a0a4a07"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0x48"
+    storage: []
+  - address: "0x34bfb672980a123a014cfa95f764a810479d121d"
+    balance: "0xa04"
+    code: "0x"
+    nonce: "0x2"
     storage: []
   memory: []
   stack:
-  - "0x16086ed57644fa565d64756ff51c5df9"
-  - "0x5cc43d467f998d"
-  - "0x508b24226d0dd356fb0c7687df7ec7a6d6e1"
+  - "0xa6f52030f9fc09959340afd897814441c856c24d19dd10819b"
+  - "0x6e1f6489decffd6e089796ecc83ae3933d0541f3d2f33c86a5a8b76fe9feaa"
+  - "0x4e34964ab8d5b1"
 after:
   accounts:
-  - address: "0x23958517cf9071d453f09a2e2af5a84d535fd15e"
-    balance: "0x44ab"
+  - address: "0x34bfb672980a123a014cfa95f764a810479d121d"
+    balance: "0xa04"
     code: "0x"
-    nonce: "0x23"
+    nonce: "0x2"
     storage: []
-  - address: "0x7cdedf899de1137942a44c42642342889effb56f"
-    balance: "0x2b21"
+  - address: "0x5001426d6f3ffa599a73ff5992b2bdcb2a0a4a07"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x1e"
+    nonce: "0x48"
     storage: []
-  - address: "0x4229188c65383399f9f2141fa3088f88ee32d239"
-    balance: "0x4056"
+  - address: "0x85e13894371f248238c1cbf627d6f3eefc3f5768"
+    balance: "0x0"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x14"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x508b24226d0dd356fb0c7687df7ec7a6d6e1"
-  - "0x5cc43d467f998d"
-  - "0x16086ed57644fa565d64756ff51c5df9"
+  - "0x4e34964ab8d5b1"
+  - "0x6e1f6489decffd6e089796ecc83ae3933d0541f3d2f33c86a5a8b76fe9feaa"
+  - "0xa6f52030f9fc09959340afd897814441c856c24d19dd10819b"
+sender: "0x85e13894371f248238c1cbf627d6f3eefc3f5768"
+receiver: "0x34bfb672980a123a014cfa95f764a810479d121d"
+inputData: "0x8d0dbbd14a125c0a9cf64ab6287d4099afaa0700f1679251929a26d790fb16a72a4a6e7b89572b322a0f288bbc11"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x664e34964ab8d5b17e6e1f6489decffd6e089796ecc83ae3933d0541f3d2f33c86a5a8b76fe9feaa78a6f52030f9fc09959340afd897814441c856c24d19dd10819b91"
+gasPrice: "0x00000000000000000000000000000000000000000000000000000000000002b4"
+gasUsed: "0x3"
 allGasUsed: "0xc"
+gasAvailable: "0xc4b2010000"
+gasLimit: 6786000000000
+haltReason: "NONE"
+coinbase: "0x5001426d6f3ffa599a73ff5992b2bdcb2a0a4a07"
+refunds: {}
+number: 8908333783331373170
+timestamp: 7925876536613619261
+mixHashOrPrevRandao: "0x2091e0073b82c1d19c42d9ad90f44500b06b5d313e8fa37a365c612f64d1b4a2"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x71508b24226d0dd356fb0c7687df7ec7a6d6e1665cc43d467f998d6f16086ed57644fa565d64756ff51c5df991"
-coinbase: "0x23958517cf9071d453f09a2e2af5a84d535fd15e"
-difficultyBytes: "0x8a0fabe012dfcf68065948b7ed80b91a93de7278af2de0439d99bae417debd36"
-gasAvailable: "0x1a27177b400"
-gasLimit: 2247500000000
-gasUsed: "0x3"
-hardFork: "byzantium"
-mixHashOrPrevRandao: "0x29e665d9d654ce2cb80dae2501ee3aebeb879b4da0d823368f85b8524c7f0cb4"
-number: 3632535816175995350
-receiver: "0x4229188c65383399f9f2141fa3088f88ee32d239"
-refunds: {}
-sender: "0x7cdedf899de1137942a44c42642342889effb56f"
-timestamp: 5145701518647383069
-value: "0x0000000000000000000000000000000000000000000000000000000000004056"
-index: 0
+difficultyBytes: "0xedd08e2596baacaf920495eaf7cfd00bc7e0ed5a902b75b329159b0ef9ebfb62"

@@ -1,49 +1,46 @@
 ---
-operation:
-  name: "EXTCODECOPY"
-  opcode: "0x3c"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0xa9eb45c41c84447a83b78481d3f629b31609d1e942e3958561b86a8d"
-haltReason: "NONE"
+name: "EXTCODECOPY"
+hardFork: "tangerineWhistle"
+index: 4
 before:
   accounts:
-  - address: "0xfb4be9ae7b59a5de8a3d8bfcfbd7589da619f183"
-    balance: "0x76c9"
-    code: "0x"
-    nonce: "0x25"
-    storage: []
-  - address: "0xdcca1fdbb39ce17bf93ad79ea97456bb0153bb51"
+  - address: "0x5d93ee1aa11e54b576e614272c0c51828aa42103"
     balance: "0x0"
     code: "0x"
-    nonce: "0x61"
+    nonce: "0x10"
     storage: []
-  - address: "0x3b323f3877a303d448e6a46d15e2239b62ee60a2"
-    balance: "0x0"
+  - address: "0x5feca1a903e9ab14877cb7c9971f354b046bc127"
+    balance: "0x3bba"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x9"
+    storage: []
+  - address: "0x3ae878ec4f753041ce8801922c18ee801a6015eb"
+    balance: "0x38ee"
+    code: "0x"
+    nonce: "0x11"
     storage: []
   memory: []
   stack:
-  - "0x7aeef95ba1a4d020b0c7"
-  - "0xc8"
-  - "0x245d450f7ae42e87d69d4357898f77a48a329d6b6a5ee3"
-  - "0x85"
+  - "0xfbb7419107e65154a78d73a1a32475037e0a6b278121218b6ed7fe146e"
+  - "0x58"
+  - "0x32ed0061da4fdc57ea60cd699decfc67e4ced21f5ecc4700"
+  - "0xce"
 after:
   accounts:
-  - address: "0xdcca1fdbb39ce17bf93ad79ea97456bb0153bb51"
+  - address: "0x5d93ee1aa11e54b576e614272c0c51828aa42103"
     balance: "0x0"
     code: "0x"
-    nonce: "0x61"
+    nonce: "0x10"
     storage: []
-  - address: "0xfb4be9ae7b59a5de8a3d8bfcfbd7589da619f183"
-    balance: "0x6214"
+  - address: "0x5feca1a903e9ab14877cb7c9971f354b046bc127"
+    balance: "0x3bba"
     code: "0x"
-    nonce: "0x25"
+    nonce: "0x9"
     storage: []
-  - address: "0x3b323f3877a303d448e6a46d15e2239b62ee60a2"
-    balance: "0x14b5"
+  - address: "0x3ae878ec4f753041ce8801922c18ee801a6015eb"
+    balance: "0x38ee"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x11"
     storage: []
   logs: []
   memory:
@@ -57,23 +54,23 @@ after:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
-  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0x2f8"
+sender: "0x5d93ee1aa11e54b576e614272c0c51828aa42103"
+receiver: "0x3ae878ec4f753041ce8801922c18ee801a6015eb"
+inputData: "0xa38282ca8eb2592d1b52beceb780403d40fb019b236fbba196f5cb5d95280ec3f2bdf31667661a37"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x60ce7732ed0061da4fdc57ea60cd699decfc67e4ced21f5ecc470060587cfbb7419107e65154a78d73a1a32475037e0a6b278121218b6ed7fe146e3c"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000002bd3"
+gasUsed: "0x2ef"
+allGasUsed: "0x2fb"
+gasAvailable: "0x17b18485a00"
+gasLimit: 7762000000000
+haltReason: "NONE"
+coinbase: "0x5feca1a903e9ab14877cb7c9971f354b046bc127"
+refunds: {}
+number: 6907067202758972338
+timestamp: 4753838035033910844
+mixHashOrPrevRandao: "0x947475d917d75ced263d25db19942f37e4a4d7fbb4407413e208f51387bc728a"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x608576245d450f7ae42e87d69d4357898f77a48a329d6b6a5ee360c8697aeef95ba1a4d020b0c73c"
-coinbase: "0xdcca1fdbb39ce17bf93ad79ea97456bb0153bb51"
-difficultyBytes: "0xe09c276511af08ae4327248b06c99ad613d92c841a9e969941e8761d1da61b35"
-gasAvailable: "0x7e8b1fdb00"
-gasLimit: 500000000000
-gasUsed: "0x2ec"
-hardFork: "tangerineWhistle"
-mixHashOrPrevRandao: "0xbc8a75e58e6b277afcda311b15bd471f92118e02ae4bdef65010b341a0dccd89"
-number: 498355906125163816
-receiver: "0x3b323f3877a303d448e6a46d15e2239b62ee60a2"
-refunds: {}
-sender: "0xfb4be9ae7b59a5de8a3d8bfcfbd7589da619f183"
-timestamp: 1476901965500590013
-value: "0x00000000000000000000000000000000000000000000000000000000000014b5"
-index: 4
+difficultyBytes: "0x31309f0a40162dd252bc873a6b5b4028f6d46014b5ce0dfe8225a14b8ca5061a"

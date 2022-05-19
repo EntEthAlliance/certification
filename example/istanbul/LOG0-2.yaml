@@ -1,51 +1,48 @@
 ---
-operation:
-  name: "LOG0"
-  opcode: "0xa0"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x115e9d4fe0839867adbaa72696d58d5b2325b3b5ba8cd1c8672e0df162250e79d6bae91a670ef4dfc9b4cb561805f99c6b"
-haltReason: "NONE"
+name: "LOG0"
+hardFork: "istanbul"
+index: 2
 before:
   accounts:
-  - address: "0xeef0bfd1de5e56e119c10747746248ced07c0f1c"
+  - address: "0x1d1f8bc8fda10093d3a170a4e23ed4192cf7efd3"
+    balance: "0x6460"
+    code: "0x"
+    nonce: "0xc"
+    storage: []
+  - address: "0x173b214883a867bbbff5646a76fe12af4cc9c490"
+    balance: "0x6b16"
+    code: "0x"
+    nonce: "0x3f"
+    storage: []
+  - address: "0x1b2579a6289abc8876b4f93021cd025363987c68"
     balance: "0x0"
     code: "0x"
-    nonce: "0x23"
-    storage: []
-  - address: "0x6c59710e926bb8ac069edf1d124a53f13fb8da30"
-    balance: "0x514e"
-    code: "0x"
-    nonce: "0x4f"
-    storage: []
-  - address: "0x46db6dfcc60ec0beeabaa30da5b2b500623643f7"
-    balance: "0x42e7"
-    code: "0x"
-    nonce: "0x4"
+    nonce: "0x"
     storage: []
   memory: []
   stack:
-  - "0x6f"
-  - "0x5c"
+  - "0x94"
+  - "0x41"
 after:
   accounts:
-  - address: "0x6c59710e926bb8ac069edf1d124a53f13fb8da30"
-    balance: "0x514e"
+  - address: "0x173b214883a867bbbff5646a76fe12af4cc9c490"
+    balance: "0x6b16"
     code: "0x"
-    nonce: "0x4f"
+    nonce: "0x3f"
     storage: []
-  - address: "0xeef0bfd1de5e56e119c10747746248ced07c0f1c"
+  - address: "0x1b2579a6289abc8876b4f93021cd025363987c68"
     balance: "0x0"
     code: "0x"
-    nonce: "0x23"
+    nonce: "0x"
     storage: []
-  - address: "0x46db6dfcc60ec0beeabaa30da5b2b500623643f7"
-    balance: "0x42e7"
+  - address: "0x1d1f8bc8fda10093d3a170a4e23ed4192cf7efd3"
+    balance: "0x6460"
     code: "0x"
-    nonce: "0x4"
+    nonce: "0xc"
     storage: []
   logs:
-  - logger: "0x46db6dfcc60ec0beeabaa30da5b2b500623643f7"
-    data: "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  - logger: "0x1b2579a6289abc8876b4f93021cd025363987c68"
+    data: "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
     topics: []
   memory:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
@@ -56,21 +53,22 @@ after:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0x472"
+sender: "0x1d1f8bc8fda10093d3a170a4e23ed4192cf7efd3"
+receiver: "0x1b2579a6289abc8876b4f93021cd025363987c68"
+inputData: "0x51c5c786f00bc3ed4c1d3aebbf29e65b850f609fc9356fdb94abb2d30cb220b3"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x60416094a0"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x394"
+allGasUsed: "0x39a"
+gasAvailable: "0x10d56a73000"
+gasLimit: 5722500000000
+haltReason: "NONE"
+coinbase: "0x173b214883a867bbbff5646a76fe12af4cc9c490"
+refunds: {}
+number: 9092363923219400120
+timestamp: 1196571944728310549
+mixHashOrPrevRandao: "0xe2a45b3c76daf9d6146a774f8a0cd67d946053ef2870a3052248600bb5bfa21c"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x605c606fa0"
-coinbase: "0x6c59710e926bb8ac069edf1d124a53f13fb8da30"
-difficultyBytes: "0x174cc86c9b7a39817b4c8770d10d3508c7bf6654992696be4bddf8ebb55d0341"
-gasAvailable: "0xb8c63f000"
-gasLimit: 7429000000000
-gasUsed: "0x46c"
-hardFork: "istanbul"
-mixHashOrPrevRandao: "0x30a1d6b2d110c0714f6c9f8fa75dfaf1519f3aa0456d285a4ce2ab92100af429"
-number: 7802015271063030257
-receiver: "0x46db6dfcc60ec0beeabaa30da5b2b500623643f7"
-refunds: {}
-sender: "0xeef0bfd1de5e56e119c10747746248ced07c0f1c"
-timestamp: 7873295152685608750
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 2
+difficultyBytes: "0x24eeee04443337d675e23f483d809fe452798f89f05716de616172b04ebbfa0e"

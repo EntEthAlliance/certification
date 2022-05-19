@@ -1,68 +1,66 @@
 ---
-operation:
-  name: "MULMOD"
-  opcode: "0x09"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x7df8ada052bd59d086935725229332571574291a6ae3d6bc42cc5e5dec96afa1bf426a27befce8ae1ec8e327e122a0aad2bfd775adcfcad9bf698b"
-haltReason: "NONE"
+name: "MULMOD"
+hardFork: "petersburg"
+index: 2
 before:
   accounts:
-  - address: "0x60f8847ed918f0aae99ea7388e37e4457abc8b1b"
-    balance: "0x3c5d"
-    code: "0x"
-    nonce: "0x13"
-    storage: []
-  - address: "0x3ecbadc6250d1881207eb676ae4f102252a38c28"
+  - address: "0x981d8a752b878029e8157631fe743db538082c7e"
     balance: "0x0"
     code: "0x"
-    nonce: "0x20"
+    nonce: "0x14"
     storage: []
-  - address: "0x9bb08a8776da1419a0d668ca911af1c8e0f7bb70"
+  - address: "0x367629886e958dca8a1881c9ae2bc8f6783377a2"
     balance: "0x0"
     code: "0x"
-    nonce: "0xb"
+    nonce: "0x49"
+    storage: []
+  - address: "0x92255c6d4e05c8003b8ce89070ba67b3eb5e0f17"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0xf"
     storage: []
   memory: []
   stack:
-  - "0x76c3d794aaebf17c9b717c6776827c77"
-  - "0xc54aca38b800264cf5b96fb3281ff10c170518"
-  - "0xf2a7af1a9854c7cd4197de2659e7ef2c0da97e1060b0eb3e2f9a0f42"
+  - "0xcfca88920e70a1ce6afc6510a18b"
+  - "0x5ced3f20cbe740e7d384a6ecd27259af50d06af4a269cd9d8121cb10ce1aacd0"
+  - "0xc3b8c11ccd5ceaeef6fbdd2e23291c80f4e134cfc86cfd25510ff3138f"
 after:
   accounts:
-  - address: "0x60f8847ed918f0aae99ea7388e37e4457abc8b1b"
-    balance: "0x3c5d"
-    code: "0x"
-    nonce: "0x13"
-    storage: []
-  - address: "0x3ecbadc6250d1881207eb676ae4f102252a38c28"
+  - address: "0x981d8a752b878029e8157631fe743db538082c7e"
     balance: "0x0"
     code: "0x"
-    nonce: "0x20"
+    nonce: "0x14"
     storage: []
-  - address: "0x9bb08a8776da1419a0d668ca911af1c8e0f7bb70"
+  - address: "0x367629886e958dca8a1881c9ae2bc8f6783377a2"
     balance: "0x0"
     code: "0x"
-    nonce: "0xb"
+    nonce: "0x49"
+    storage: []
+  - address: "0x92255c6d4e05c8003b8ce89070ba67b3eb5e0f17"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0xf"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x0000000022294eaf8267f995fcae3f38e112735560e0c3bed82f16addd2b325c"
+  - "0x0000009d3f39ee99f6f9e3e9605233babee14444f918317442bb3ff025713fc5"
+sender: "0x981d8a752b878029e8157631fe743db538082c7e"
+receiver: "0x92255c6d4e05c8003b8ce89070ba67b3eb5e0f17"
+inputData: "0x786b83fe03ae97298cac84b4f9e33ec33dfb717a28e7b991fd5d1ab5d4be7e15b7a596ad1d8d9d09c8de6bf42c78"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x7cc3b8c11ccd5ceaeef6fbdd2e23291c80f4e134cfc86cfd25510ff3138f7f5ced3f20cbe740e7d384a6ecd27259af50d06af4a269cd9d8121cb10ce1aacd06dcfca88920e70a1ce6afc6510a18b09"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x8"
 allGasUsed: "0x11"
+gasAvailable: "0x53a1fd0800"
+gasLimit: 5047000000000
+haltReason: "NONE"
+coinbase: "0x367629886e958dca8a1881c9ae2bc8f6783377a2"
+refunds: {}
+number: 7695645814572175371
+timestamp: 854581847400587989
+mixHashOrPrevRandao: "0x6384d941c112da0e1434f08c5238dd330c5c989e42b79fe8ced47a0f73bad21d"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x7bf2a7af1a9854c7cd4197de2659e7ef2c0da97e1060b0eb3e2f9a0f4272c54aca38b800264cf5b96fb3281ff10c1705186f76c3d794aaebf17c9b717c6776827c7709"
-coinbase: "0x3ecbadc6250d1881207eb676ae4f102252a38c28"
-difficultyBytes: "0xeef70c5d93c7b6739ca07574957ac3524ba8da757948fc0d5bb133e0f785e99e"
-gasAvailable: "0x1b2f36fd900"
-gasLimit: 9769500000000
-gasUsed: "0x8"
-hardFork: "petersburg"
-mixHashOrPrevRandao: "0x57c4234482f722794dd143e325a7bb0f6d6628ec6ad2cf0a22d7b36f729f3f0d"
-number: 7949615891626257784
-receiver: "0x9bb08a8776da1419a0d668ca911af1c8e0f7bb70"
-refunds: {}
-sender: "0x60f8847ed918f0aae99ea7388e37e4457abc8b1b"
-timestamp: 4316795735782738695
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 2
+difficultyBytes: "0x7e7f58c719165f0fa50ddb60112c5b43cffc20c07b89903472c438b0c30c0472"

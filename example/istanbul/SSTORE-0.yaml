@@ -1,68 +1,66 @@
 ---
-operation:
-  name: "SSTORE"
-  opcode: "0x55"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0xbcc9bdbf4c9479f415c43d1458f985fbf5cbd05ec2437fac215400dc47ebeaff38731edbabee4d25d9bc9a84720cb0e65df89b6e592c8b8e5f66"
-haltReason: "NONE"
+name: "SSTORE"
+hardFork: "istanbul"
+index: 0
 before:
   accounts:
-  - address: "0xb9b50c57dda28e9706123903e555b0d931b53693"
-    balance: "0x407f"
+  - address: "0xb700064c218f33d5d941ee9a3601193a2983e033"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x1e"
+    nonce: "0x24"
     storage: []
-  - address: "0xa479ade773fed7b189fb8d36f8a9b05288602c27"
-    balance: "0x57d1"
+  - address: "0xcc75436e7f76f6e27ba99338c367dd63dc1a77b6"
+    balance: "0x73db"
     code: "0x"
     nonce: "0x3c"
     storage: []
-  - address: "0xc9de1339ad6cbe7a0219531f1b31f59a0ef6c392"
-    balance: "0x72"
+  - address: "0x8da455315e7d7afc4d17abbb430cf69a8c9f7806"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x15"
+    nonce: "0x3"
     storage: []
   memory: []
   stack:
-  - "0x4cdc2581608dd381b2826caea30ab8336df5ed57"
-  - "0x99aed47730fde34d752ffb2dcbe1eceb52b37694c4bc064a714c66c043"
+  - "0x6fe74adc4937a9edd4525869ffe85df7bf9928"
+  - "0x05af2112edf2527f09f7a3132fbeb5a5e5debaea5a1c2a724c1379"
 after:
   accounts:
-  - address: "0xc9de1339ad6cbe7a0219531f1b31f59a0ef6c392"
-    balance: "0x30a7"
-    code: "0x"
-    nonce: "0x15"
-    storage:
-    - key: "0x0000000000000000000000004cdc2581608dd381b2826caea30ab8336df5ed57"
-      value: "0x00000099aed47730fde34d752ffb2dcbe1eceb52b37694c4bc064a714c66c043"
-  - address: "0xb9b50c57dda28e9706123903e555b0d931b53693"
-    balance: "0x104a"
-    code: "0x"
-    nonce: "0x1e"
-    storage: []
-  - address: "0xa479ade773fed7b189fb8d36f8a9b05288602c27"
-    balance: "0x57d1"
+  - address: "0xcc75436e7f76f6e27ba99338c367dd63dc1a77b6"
+    balance: "0x73db"
     code: "0x"
     nonce: "0x3c"
     storage: []
+  - address: "0xb700064c218f33d5d941ee9a3601193a2983e033"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0x24"
+    storage: []
+  - address: "0x8da455315e7d7afc4d17abbb430cf69a8c9f7806"
+    balance: "0x0"
+    code: "0x"
+    nonce: "0x3"
+    storage:
+    - key: "0x000000000000000000000000006fe74adc4937a9edd4525869ffe85df7bf9928"
+      value: "0x000000000005af2112edf2527f09f7a3132fbeb5a5e5debaea5a1c2a724c1379"
   logs: []
   memory: []
   stack: []
+sender: "0xb700064c218f33d5d941ee9a3601193a2983e033"
+receiver: "0x8da455315e7d7afc4d17abbb430cf69a8c9f7806"
+inputData: "0xa7d034267116bc1e7caf5c29275ac924964d0cada4a67688ca31128886f85b044c2d26c7"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x7a05af2112edf2527f09f7a3132fbeb5a5e5debaea5a1c2a724c1379726fe74adc4937a9edd4525869ffe85df7bf992855"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x4e20"
 allGasUsed: "0x4e26"
+gasAvailable: "0x56a2e36900"
+gasLimit: 7663500000000
+haltReason: "NONE"
+coinbase: "0xcc75436e7f76f6e27ba99338c367dd63dc1a77b6"
+refunds: {}
+number: 3182331623107190521
+timestamp: 5781469097684473059
+mixHashOrPrevRandao: "0x97d135b40af8877754cce20f8bf704a4765e79050051e463fcc942731e826b7c"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x7c99aed47730fde34d752ffb2dcbe1eceb52b37694c4bc064a714c66c043734cdc2581608dd381b2826caea30ab8336df5ed5755"
-coinbase: "0xa479ade773fed7b189fb8d36f8a9b05288602c27"
-difficultyBytes: "0x25c5bc08382e03320fd62d9fa5ad6a726c10a5a0c13ad62f1bf2319f51875ef9"
-gasAvailable: "0x178116c1800"
-gasLimit: 3807000000000
-gasUsed: "0x4e20"
-hardFork: "istanbul"
-mixHashOrPrevRandao: "0x4538bf9d7343f63b94631b2183a4102d01f2d52743d478070d0d8fc89495be41"
-number: 9139438904034972522
-receiver: "0xc9de1339ad6cbe7a0219531f1b31f59a0ef6c392"
-refunds: {}
-sender: "0xb9b50c57dda28e9706123903e555b0d931b53693"
-timestamp: 2551191912288522397
-value: "0x0000000000000000000000000000000000000000000000000000000000003035"
-index: 0
+difficultyBytes: "0x2f2433539bf07f616d0403d79138d173efe9a04b9a562584f8305531b00996ba"

@@ -1,71 +1,69 @@
 ---
-operation:
-  name: "SELFDESTRUCT"
-  opcode: "0xff"
-gasPrice: "0x000000000000000000000000000000000000000000000000000000000000423a"
-inputData: "0x94c74965811372e39c79890a7271ed6ecb4ff462f027f207b20009c0"
-haltReason: "NONE"
+name: "SELFDESTRUCT"
+hardFork: "byzantium"
+index: 3
 before:
   accounts:
-  - address: "0x4206ca6376bbe3ed0cfe1b0bb8647f70d11a3517"
-    balance: "0x5076"
+  - address: "0x1302b936aaf0402a00910e9fb0ebe50d85372bec"
+    balance: "0x5469"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x6"
     storage: []
-  - address: "0x78bd570a1af59a582f1bafa8585747b3f6343239"
-    balance: "0x0"
+  - address: "0x36feb7a2cca959c9638adf0ec23c30499996a9b4"
+    balance: "0x38d0"
     code: "0x"
-    nonce: "0x1f"
+    nonce: "0x38"
     storage: []
-  - address: "0xd73be6bc91d5ecc62232bc2e878b767af81a2fad"
-    balance: "0x6c72"
+  - address: "0xa74d51b3ee2fa03a5a8a1aa51e81d5f09c6bc819"
+    balance: "0x34bf"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x2"
     storage: []
   memory: []
   stack:
-  - "0x0849044307267dd9fa7f31f7d3923646229884afcbb25a"
+  - "0xc3dca24140f4ae151d3a17d05c6167763d046b74a6c17361"
 after:
   accounts:
-  - address: "0xd73be6bc91d5ecc62232bc2e878b767af81a2fad"
+  - address: "0x1302b936aaf0402a00910e9fb0ebe50d85372bec"
+    balance: "0x5469"
+    code: "0x"
+    nonce: "0x6"
+    storage: []
+  - address: "0xa74d51b3ee2fa03a5a8a1aa51e81d5f09c6bc819"
     balance: "0x0"
     code: "0x"
-    nonce: "0xf"
+    nonce: "0x2"
     storage: []
-  - address: "0x4206ca6376bbe3ed0cfe1b0bb8647f70d11a3517"
-    balance: "0x5076"
-    code: "0x"
-    nonce: "0x7"
-    storage: []
-  - address: "0x4307267dd9fa7f31f7d3923646229884afcbb25a"
-    balance: "0x6c72"
+  - address: "0x40f4ae151d3a17d05c6167763d046b74a6c17361"
+    balance: "0x34bf"
     code: "0x"
     nonce: "0x"
     storage: []
-  - address: "0x78bd570a1af59a582f1bafa8585747b3f6343239"
-    balance: "0x0"
+  - address: "0x36feb7a2cca959c9638adf0ec23c30499996a9b4"
+    balance: "0x38d0"
     code: "0x"
-    nonce: "0x1f"
+    nonce: "0x38"
     storage: []
   logs: []
   memory: []
   stack: []
+sender: "0x1302b936aaf0402a00910e9fb0ebe50d85372bec"
+receiver: "0xa74d51b3ee2fa03a5a8a1aa51e81d5f09c6bc819"
+inputData: "0xea65c5145f0c08c0377d0994c8ebd18740b2a2a364886e0d4497"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x77c3dca24140f4ae151d3a17d05c6167763d046b74a6c17361ff"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x7530"
 allGasUsed: "0x7533"
+gasAvailable: "0x19850aa6100"
+gasLimit: 6446000000000
+haltReason: "NONE"
+coinbase: "0x36feb7a2cca959c9638adf0ec23c30499996a9b4"
+refunds:
+  "0x40f4ae151d3a17d05c6167763d046b74a6c17361": "0x00000000000000000000000000000000000000000000000000000000000034bf"
+number: 3131850776172342564
+timestamp: 3103229394830136781
+mixHashOrPrevRandao: "0x5d0e8b4c89997f8d1ef35f61157cf22474c389dc17354e393f0d34b876489205"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x760849044307267dd9fa7f31f7d3923646229884afcbb25aff"
-coinbase: "0x78bd570a1af59a582f1bafa8585747b3f6343239"
-difficultyBytes: "0xc0b6b0093eaf9df3096fecf80aba081ee08f05cdc42bbda4868af509a4044f76"
-gasAvailable: "0xe48beb5800"
-gasLimit: 5702500000000
-gasUsed: "0x7530"
-hardFork: "byzantium"
-mixHashOrPrevRandao: "0xb48b9c25ec197e5d7ffbebeec38169fed0578e47eb7a95a434c3cf63ad185a8f"
-number: 3706762272105223092
-receiver: "0xd73be6bc91d5ecc62232bc2e878b767af81a2fad"
-refunds:
-  "0x4307267dd9fa7f31f7d3923646229884afcbb25a": "0x0000000000000000000000000000000000000000000000000000000000006c72"
-sender: "0x4206ca6376bbe3ed0cfe1b0bb8647f70d11a3517"
-timestamp: 2140481720442705440
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 3
+difficultyBytes: "0x514983926d7ee1991a0c9b3b849c2186acd4a7d8ab20a68583eb698985b9ecf4"

@@ -1,74 +1,72 @@
 ---
-operation:
-  name: "SWAP4"
-  opcode: "0x93"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x008fd590e0abbcd95d7ba0d762c994bd317e506a9281f933bfb2ed9579ce2ea07fd01488fb865c6fbed59868e479db40c5b9ffd4447a4bc905cfc1269d"
-haltReason: "NONE"
+name: "SWAP4"
+hardFork: "tangerineWhistle"
+index: 0
 before:
   accounts:
-  - address: "0x09b0750958d094f746f1d0cfef59b202ff428163"
+  - address: "0x6795fb44b4b36261e88085bb698cfdb0fd5340b5"
     balance: "0x0"
     code: "0x"
-    nonce: "0x1f"
+    nonce: "0xc"
     storage: []
-  - address: "0x06458987483f64efba9aa923432db88dee7cc136"
+  - address: "0x3c4262ca4b52c57a68b5546e159209f950f8ff73"
     balance: "0x0"
     code: "0x"
-    nonce: "0x36"
+    nonce: "0x54"
     storage: []
-  - address: "0xe0233c3ad23b43f15b0f4b63e41a608762d58914"
+  - address: "0xf521b23d054c9ff658f6d8fdc80b5383a0ad5973"
     balance: "0x0"
     code: "0x"
-    nonce: "0xe"
+    nonce: "0x10"
     storage: []
   memory: []
   stack:
-  - "0xcfb7141d33"
-  - "0x97f40ca26d9bb94bd9"
-  - "0x45233cf91e13d8489253b5a165f1c620bb1d"
-  - "0x881dcd85"
-  - "0x515ea5ead9b0e926"
+  - "0x2c85e740c091897b65f7f644cdb68be5"
+  - "0xf247fb3c2b01b6325ef4a2971df2926ff794cb26c8b107ded45b6c665a"
+  - "0xe805f2cea3bbc8c5d110"
+  - "0xfcd145f29080"
+  - "0xf8dcf3a24d90b19bf0"
 after:
   accounts:
-  - address: "0x06458987483f64efba9aa923432db88dee7cc136"
+  - address: "0x3c4262ca4b52c57a68b5546e159209f950f8ff73"
     balance: "0x0"
     code: "0x"
-    nonce: "0x36"
+    nonce: "0x54"
     storage: []
-  - address: "0x09b0750958d094f746f1d0cfef59b202ff428163"
+  - address: "0xf521b23d054c9ff658f6d8fdc80b5383a0ad5973"
     balance: "0x0"
     code: "0x"
-    nonce: "0x1f"
+    nonce: "0x10"
     storage: []
-  - address: "0xe0233c3ad23b43f15b0f4b63e41a608762d58914"
+  - address: "0x6795fb44b4b36261e88085bb698cfdb0fd5340b5"
     balance: "0x0"
     code: "0x"
-    nonce: "0xe"
+    nonce: "0xc"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x515ea5ead9b0e926"
-  - "0x97f40ca26d9bb94bd9"
-  - "0x45233cf91e13d8489253b5a165f1c620bb1d"
-  - "0x881dcd85"
-  - "0xcfb7141d33"
+  - "0xf8dcf3a24d90b19bf0"
+  - "0xf247fb3c2b01b6325ef4a2971df2926ff794cb26c8b107ded45b6c665a"
+  - "0xe805f2cea3bbc8c5d110"
+  - "0xfcd145f29080"
+  - "0x2c85e740c091897b65f7f644cdb68be5"
+sender: "0x6795fb44b4b36261e88085bb698cfdb0fd5340b5"
+receiver: "0xf521b23d054c9ff658f6d8fdc80b5383a0ad5973"
+inputData: "0x174d4f17cb00e2135dfb577e9ca975282082d0c0cbc93acb9679db1e917184bd29d1fee4bc"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x68f8dcf3a24d90b19bf065fcd145f2908069e805f2cea3bbc8c5d1107cf247fb3c2b01b6325ef4a2971df2926ff794cb26c8b107ded45b6c665a6f2c85e740c091897b65f7f644cdb68be593"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x3"
 allGasUsed: "0x12"
+gasAvailable: "0x1535fbaf000"
+gasLimit: 740000000000
+haltReason: "NONE"
+coinbase: "0x3c4262ca4b52c57a68b5546e159209f950f8ff73"
+refunds: {}
+number: 8393400631760475132
+timestamp: 1581088006164442001
+mixHashOrPrevRandao: "0xbb6240a77f81e63b7a90753413b63e29970a15d7d4780cc19b04a3f8ad1652d0"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x67515ea5ead9b0e92663881dcd857145233cf91e13d8489253b5a165f1c620bb1d6897f40ca26d9bb94bd964cfb7141d3393"
-coinbase: "0x06458987483f64efba9aa923432db88dee7cc136"
-difficultyBytes: "0x34e950f0ea6ccd7cafb2c02f49dcb69c49814bdadc2e52a992ddab0fdaf0d38d"
-gasAvailable: "0x1afbce48f00"
-gasLimit: 9374000000000
-gasUsed: "0x3"
-hardFork: "tangerineWhistle"
-mixHashOrPrevRandao: "0x47e917bf11f456067ce110bb86b9350ac1b371984a6498b8729876087de5a6fd"
-number: 6097023188996797204
-receiver: "0xe0233c3ad23b43f15b0f4b63e41a608762d58914"
-refunds: {}
-sender: "0x09b0750958d094f746f1d0cfef59b202ff428163"
-timestamp: 3899184521817977813
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 0
+difficultyBytes: "0xf651e4da225ff12a06717b825599fe2b50df399a9c301c6bd7487f91ee55b4ae"

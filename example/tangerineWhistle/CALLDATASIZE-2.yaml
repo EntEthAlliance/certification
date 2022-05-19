@@ -1,65 +1,63 @@
 ---
-operation:
-  name: "CALLDATASIZE"
-  opcode: "0x36"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x719e7e69a75825e445e27a352f55853244ab34e223a771b79f3dd96187cbb4c99863f5a708011fe9296bc25c04da089877161e"
-haltReason: "NONE"
+name: "CALLDATASIZE"
+hardFork: "tangerineWhistle"
+index: 2
 before:
   accounts:
-  - address: "0x61215e70711493a3d9a4cdde42665b94cbbea8cc"
-    balance: "0x2ddc"
+  - address: "0x30d7a5afddf1a3b2b46634264e6a327e3b04b20e"
+    balance: "0x7ace"
     code: "0x"
-    nonce: "0x17"
+    nonce: "0x27"
     storage: []
-  - address: "0x25f3f7b8413a022ff4a34f501f26c6bb73078256"
-    balance: "0x2d58"
-    code: "0x"
-    nonce: "0x7"
-    storage: []
-  - address: "0xfb6a63980b7e116f95a88d74f22d8e4568717802"
+  - address: "0x2f1a85a86302b82ebb2147a544bea9094cb025fb"
     balance: "0x0"
     code: "0x"
-    nonce: "0xb"
+    nonce: "0x12"
+    storage: []
+  - address: "0x60385b8e0900d41a58b9e094d4e3f4dff64b88ef"
+    balance: "0x184c"
+    code: "0x"
+    nonce: "0x"
     storage: []
   memory: []
   stack: []
 after:
   accounts:
-  - address: "0xfb6a63980b7e116f95a88d74f22d8e4568717802"
-    balance: "0x568"
+  - address: "0x60385b8e0900d41a58b9e094d4e3f4dff64b88ef"
+    balance: "0x184c"
     code: "0x"
-    nonce: "0xb"
+    nonce: "0x"
     storage: []
-  - address: "0x25f3f7b8413a022ff4a34f501f26c6bb73078256"
-    balance: "0x2d58"
+  - address: "0x30d7a5afddf1a3b2b46634264e6a327e3b04b20e"
+    balance: "0x7ace"
     code: "0x"
-    nonce: "0x7"
+    nonce: "0x27"
     storage: []
-  - address: "0x61215e70711493a3d9a4cdde42665b94cbbea8cc"
-    balance: "0x2874"
+  - address: "0x2f1a85a86302b82ebb2147a544bea9094cb025fb"
+    balance: "0x0"
     code: "0x"
-    nonce: "0x17"
+    nonce: "0x12"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x0000000000000000000000000000000000000000000000000000000000000033"
+  - "0x0000000000000000000000000000000000000000000000000000000000000008"
+sender: "0x30d7a5afddf1a3b2b46634264e6a327e3b04b20e"
+receiver: "0x60385b8e0900d41a58b9e094d4e3f4dff64b88ef"
+inputData: "0x2776207ffdd1f75f"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x36"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x2"
 allGasUsed: "0x2"
+gasAvailable: "0x10ab51edf00"
+gasLimit: 7357500000000
+haltReason: "NONE"
+coinbase: "0x2f1a85a86302b82ebb2147a544bea9094cb025fb"
+refunds: {}
+number: 5542156015220380680
+timestamp: 3470095198583179569
+mixHashOrPrevRandao: "0xbbad9640c3007dedede5567bc3d2122c08f40dee9acd3ed4bf043ba75cbde0dc"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x36"
-coinbase: "0x25f3f7b8413a022ff4a34f501f26c6bb73078256"
-difficultyBytes: "0xfd5c769b55b4e17174561a1a68c2b32088fece8af77235e184d900c3789f0f22"
-gasAvailable: "0x7d8ad31000"
-gasLimit: 7943500000000
-gasUsed: "0x2"
-hardFork: "tangerineWhistle"
-mixHashOrPrevRandao: "0x16e161050729bb88f6c7e1e6e410b67705ba13abdb5b2d6b1e23ca75ef0815b4"
-number: 452928863012379024
-receiver: "0xfb6a63980b7e116f95a88d74f22d8e4568717802"
-refunds: {}
-sender: "0x61215e70711493a3d9a4cdde42665b94cbbea8cc"
-timestamp: 6435978706995821339
-value: "0x0000000000000000000000000000000000000000000000000000000000000568"
-index: 2
+difficultyBytes: "0xc6107d4163c7c193084bdcd29b2f83a37f486b3c9dbfbf0456239ba990e7b172"

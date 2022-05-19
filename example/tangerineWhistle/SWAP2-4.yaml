@@ -1,70 +1,68 @@
 ---
-operation:
-  name: "SWAP2"
-  opcode: "0x91"
-gasPrice: "0x00000000000000000000000000000000000000000000000000000000000060e3"
-inputData: "0x5959b78016ac088913193f98cb90578dcfbfe3108a0fe35f433eb2502559d5594650944359781effe09eb2"
-haltReason: "NONE"
+name: "SWAP2"
+hardFork: "tangerineWhistle"
+index: 4
 before:
   accounts:
-  - address: "0x0f4a315ba8b002ced9e2fb60c3e1dcf68f8b8bb9"
-    balance: "0x0"
+  - address: "0xa468626101f98be3906b4a21530f7d5dd0bd74c9"
+    balance: "0x3317"
     code: "0x"
-    nonce: "0x17"
+    nonce: "0x26"
     storage: []
-  - address: "0x31f251d65d661fc291eb15b7f3bf873897576340"
-    balance: "0x0"
+  - address: "0xc2a82f9530f3160c628c9de3b0457bf7aedcca76"
+    balance: "0x957"
     code: "0x"
-    nonce: "0x12"
+    nonce: "0x29"
     storage: []
-  - address: "0xab33c9b8b96d834170089dd0b79e6804f74df45e"
-    balance: "0x709c"
+  - address: "0x2f606800ae5c122ef81ce3e11aa18063cf9cece5"
+    balance: "0x54a2"
     code: "0x"
-    nonce: "0x3"
+    nonce: "0x4"
     storage: []
   memory: []
   stack:
-  - "0xe82deebd6aeb2740acbecbcc42685e75"
-  - "0x5ef1724c9f23445492333f"
-  - "0x7f8496e617aef5ebf96f28835e4951f30ac3138783c5b4ba52"
+  - "0xd82959605746f0ededfbe793763caf4b012481410227b63fa8009158f6"
+  - "0x5a652639ab383dbb2db55098323e61df21cf27"
+  - "0xf6a264bed2bfefeeeefbe05608db3f7c6dca359b"
 after:
   accounts:
-  - address: "0xab33c9b8b96d834170089dd0b79e6804f74df45e"
-    balance: "0x709c"
+  - address: "0x2f606800ae5c122ef81ce3e11aa18063cf9cece5"
+    balance: "0x5ac5"
     code: "0x"
-    nonce: "0x3"
+    nonce: "0x4"
     storage: []
-  - address: "0x0f4a315ba8b002ced9e2fb60c3e1dcf68f8b8bb9"
-    balance: "0x0"
+  - address: "0xa468626101f98be3906b4a21530f7d5dd0bd74c9"
+    balance: "0x2cf4"
     code: "0x"
-    nonce: "0x17"
+    nonce: "0x26"
     storage: []
-  - address: "0x31f251d65d661fc291eb15b7f3bf873897576340"
-    balance: "0x0"
+  - address: "0xc2a82f9530f3160c628c9de3b0457bf7aedcca76"
+    balance: "0x957"
     code: "0x"
-    nonce: "0x12"
+    nonce: "0x29"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x7f8496e617aef5ebf96f28835e4951f30ac3138783c5b4ba52"
-  - "0x5ef1724c9f23445492333f"
-  - "0xe82deebd6aeb2740acbecbcc42685e75"
+  - "0xf6a264bed2bfefeeeefbe05608db3f7c6dca359b"
+  - "0x5a652639ab383dbb2db55098323e61df21cf27"
+  - "0xd82959605746f0ededfbe793763caf4b012481410227b63fa8009158f6"
+sender: "0xa468626101f98be3906b4a21530f7d5dd0bd74c9"
+receiver: "0x2f606800ae5c122ef81ce3e11aa18063cf9cece5"
+inputData: "0xc092cbb9acec895336c87bd0e2d1bb12f3aeb390da55b3630d799470833068cefb2c236a8fc0fa"
+value: "0x0000000000000000000000000000000000000000000000000000000000000623"
+code: "0x73f6a264bed2bfefeeeefbe05608db3f7c6dca359b725a652639ab383dbb2db55098323e61df21cf277cd82959605746f0ededfbe793763caf4b012481410227b63fa8009158f691"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
+gasUsed: "0x3"
 allGasUsed: "0xc"
+gasAvailable: "0x1c0b01c6700"
+gasLimit: 4188500000000
+haltReason: "NONE"
+coinbase: "0xc2a82f9530f3160c628c9de3b0457bf7aedcca76"
+refunds: {}
+number: 5306048037166548399
+timestamp: 6059590943848684758
+mixHashOrPrevRandao: "0xecea80b8678020f3eaa0cc9d64b7d9ae1dd8c2f3cc4d852fb61a8acf591000e7"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x787f8496e617aef5ebf96f28835e4951f30ac3138783c5b4ba526a5ef1724c9f23445492333f6fe82deebd6aeb2740acbecbcc42685e7591"
-coinbase: "0x31f251d65d661fc291eb15b7f3bf873897576340"
-difficultyBytes: "0x92719421734760cb1efd52e03c97e5dbeda824713eac8a72947e217d98f25e0a"
-gasAvailable: "0x346ef74c00"
-gasLimit: 2648000000000
-gasUsed: "0x3"
-hardFork: "tangerineWhistle"
-mixHashOrPrevRandao: "0x0dbf739e1ba1be760e963d3fac13f6b941cebe7b14e52dd9237a566315a3a916"
-number: 9001153266200315121
-receiver: "0xab33c9b8b96d834170089dd0b79e6804f74df45e"
-refunds: {}
-sender: "0x0f4a315ba8b002ced9e2fb60c3e1dcf68f8b8bb9"
-timestamp: 6476080244420817916
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 4
+difficultyBytes: "0xbcad9c78bc3b08be6fb9ab8dcb7ad58232b8d8eb15314327f6b3e1eaf6ba2a2c"

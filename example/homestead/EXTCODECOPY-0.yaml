@@ -1,49 +1,46 @@
 ---
-operation:
-  name: "EXTCODECOPY"
-  opcode: "0x3c"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000000000"
-inputData: "0x1f06f7bb6f443ff2f740ec61"
-haltReason: "NONE"
+name: "EXTCODECOPY"
+hardFork: "homestead"
+index: 0
 before:
   accounts:
-  - address: "0x6032bca3d88244ffb5347a47ca2ae401265b48bc"
-    balance: "0x5839"
+  - address: "0x837bf6803c2c174a8dfbd00b16b3e26ee5bca055"
+    balance: "0x776c"
     code: "0x"
-    nonce: "0x27"
+    nonce: "0x2"
     storage: []
-  - address: "0xa805f256b15babbbd1bef8f5d581713d23583a3c"
+  - address: "0x0142e902cc2de01434ebb46138335a3347f6d667"
     balance: "0x0"
     code: "0x"
-    nonce: "0x27"
+    nonce: "0x16"
     storage: []
-  - address: "0x04241b8262b3200ca7341cf468875bbb68b61d61"
-    balance: "0x3728"
+  - address: "0x37b4c43e4d50151fab101a8a064aacd259c637b8"
+    balance: "0x6b5c"
     code: "0x"
-    nonce: "0xc"
+    nonce: "0x8"
     storage: []
   memory: []
   stack:
-  - "0x6b67150f44c3ac796504008831c658ce"
-  - "0xbb"
-  - "0x5d7a9b26400b62a0ff4e188ec2b839b787d7a5c818"
-  - "0xcd"
+  - "0x89538a848908caa3f793ccc5ee115ef873ae94ed0179785eb4dd7f"
+  - "0xcc"
+  - "0xe8ede2cf3b323786c43872d8d15bc10dda"
+  - "0xf6"
 after:
   accounts:
-  - address: "0x04241b8262b3200ca7341cf468875bbb68b61d61"
-    balance: "0x7d98"
+  - address: "0x37b4c43e4d50151fab101a8a064aacd259c637b8"
+    balance: "0xd298"
     code: "0x"
-    nonce: "0xc"
+    nonce: "0x8"
     storage: []
-  - address: "0x6032bca3d88244ffb5347a47ca2ae401265b48bc"
-    balance: "0x11c9"
-    code: "0x"
-    nonce: "0x27"
-    storage: []
-  - address: "0xa805f256b15babbbd1bef8f5d581713d23583a3c"
+  - address: "0x0142e902cc2de01434ebb46138335a3347f6d667"
     balance: "0x0"
     code: "0x"
-    nonce: "0x27"
+    nonce: "0x16"
+    storage: []
+  - address: "0x837bf6803c2c174a8dfbd00b16b3e26ee5bca055"
+    balance: "0x1030"
+    code: "0x"
+    nonce: "0x2"
     storage: []
   logs: []
   memory:
@@ -60,22 +57,25 @@ after:
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
   - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
+  - "0x0000000000000000000000000000000000000000000000000000000000000000"
   stack: []
-allGasUsed: "0x5c"
+sender: "0x837bf6803c2c174a8dfbd00b16b3e26ee5bca055"
+receiver: "0x37b4c43e4d50151fab101a8a064aacd259c637b8"
+inputData: "0xb1e91cf74f1a5f549288997df6979b2e691ff0bab1a18a6b4308065cf649"
+value: "0x000000000000000000000000000000000000000000000000000000000000673c"
+code: "0x60f670e8ede2cf3b323786c43872d8d15bc10dda60cc7a89538a848908caa3f793ccc5ee115ef873ae94ed0179785eb4dd7f3c"
+gasPrice: "0x0000000000000000000000000000000000000000000000000000000000002b08"
+gasUsed: "0x59"
+allGasUsed: "0x65"
+gasAvailable: "0x88f9699b00"
+gasLimit: 9345500000000
+haltReason: "NONE"
+coinbase: "0x0142e902cc2de01434ebb46138335a3347f6d667"
+refunds: {}
+number: 7637646658931085403
+timestamp: 630756562391587008
+mixHashOrPrevRandao: "0x74f2c5eba6b32c43b4944976d8cdade2afdbadbbd216d1afa12d867c72fe6692"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x60cd745d7a9b26400b62a0ff4e188ec2b839b787d7a5c81860bb6f6b67150f44c3ac796504008831c658ce3c"
-coinbase: "0xa805f256b15babbbd1bef8f5d581713d23583a3c"
-difficultyBytes: "0xdcdfba52f3ae87aa6ceb08a4698cbf22ec1c441b6c0d330ced9f13002743d7de"
-gasAvailable: "0xae81ae6700"
-gasLimit: 1904000000000
-gasUsed: "0x50"
-hardFork: "homestead"
-mixHashOrPrevRandao: "0xfe78b69e17e279c67b760e550b36cb2984a8c9cd9eeb3d974803521646e91534"
-number: 8485823094487022432
-receiver: "0x04241b8262b3200ca7341cf468875bbb68b61d61"
-refunds: {}
-sender: "0x6032bca3d88244ffb5347a47ca2ae401265b48bc"
-timestamp: 4531821845823609621
-value: "0x0000000000000000000000000000000000000000000000000000000000004670"
-index: 0
+difficultyBytes: "0x3295a718744b3dc2ef8bce4bc5e39cc48213c4982b2fcac2168528231f9a2792"

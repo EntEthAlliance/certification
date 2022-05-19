@@ -1,67 +1,65 @@
 ---
-operation:
-  name: "XOR"
-  opcode: "0x18"
-gasPrice: "0x0000000000000000000000000000000000000000000000000000000000005822"
-inputData: "0x3539073373933d0e3dd06d006b541b03db5611441dbf4228b1204fb3809f1be68a701cacb47c4349ee251570"
-haltReason: "NONE"
+name: "XOR"
+hardFork: "frontier"
+index: 3
 before:
   accounts:
-  - address: "0xcc5f69eb28a593f7e910f366900cabfef47444a3"
+  - address: "0x8713384231ce44c2b2b21d6ceba5b979631c03d7"
     balance: "0x0"
     code: "0x"
-    nonce: "0x4"
+    nonce: "0x22"
     storage: []
-  - address: "0xf2e49bbf51b72b5ef90c43e537bf96e4dcde707b"
-    balance: "0x7a1c"
+  - address: "0xb9c932b938bc8aa5f171c6a73ee0e077f3dade0f"
+    balance: "0x614b"
     code: "0x"
-    nonce: "0x49"
+    nonce: "0x16"
     storage: []
-  - address: "0x1576968636c85c650ed73dd12b72273969b5269c"
+  - address: "0x8ea061a36f6d7c3b419cb3a4e3863b49d1772601"
     balance: "0x0"
     code: "0x"
-    nonce: "0x3"
+    nonce: "0x"
     storage: []
   memory: []
   stack:
-  - "0x54f8d23d7b1033974fd05d04a774f45fe60456cfeb94763d"
-  - "0xae02669a47102ee66b165a02"
+  - "0xffb0e8"
+  - "0x2c786374"
 after:
   accounts:
-  - address: "0x1576968636c85c650ed73dd12b72273969b5269c"
+  - address: "0x8ea061a36f6d7c3b419cb3a4e3863b49d1772601"
     balance: "0x0"
     code: "0x"
-    nonce: "0x3"
+    nonce: "0x"
     storage: []
-  - address: "0xf2e49bbf51b72b5ef90c43e537bf96e4dcde707b"
-    balance: "0x7a1c"
-    code: "0x"
-    nonce: "0x49"
-    storage: []
-  - address: "0xcc5f69eb28a593f7e910f366900cabfef47444a3"
+  - address: "0x8713384231ce44c2b2b21d6ceba5b979631c03d7"
     balance: "0x0"
     code: "0x"
-    nonce: "0x4"
+    nonce: "0x22"
+    storage: []
+  - address: "0xb9c932b938bc8aa5f171c6a73ee0e077f3dade0f"
+    balance: "0x614b"
+    code: "0x"
+    nonce: "0x16"
     storage: []
   logs: []
   memory: []
   stack:
-  - "0x000000000000000054f8d23d7b1033974fd05d04097692c5a114782980822c3f"
+  - "0x000000000000000000000000000000000000000000000000000000002c87d39c"
+sender: "0x8713384231ce44c2b2b21d6ceba5b979631c03d7"
+receiver: "0x8ea061a36f6d7c3b419cb3a4e3863b49d1772601"
+inputData: "0x61f5ae53a87e1bcfd7153c53ad3066"
+value: "0x0000000000000000000000000000000000000000000000000000000000000000"
+code: "0x632c78637462ffb0e818"
+gasPrice: "0x00000000000000000000000000000000000000000000000000000000000076b6"
+gasUsed: "0x3"
 allGasUsed: "0x9"
+gasAvailable: "0x35b0d4c200"
+gasLimit: 8415500000000
+haltReason: "NONE"
+coinbase: "0xb9c932b938bc8aa5f171c6a73ee0e077f3dade0f"
+refunds: {}
+number: 4647648909778572981
+timestamp: 8413010481081679955
+mixHashOrPrevRandao: "0xe0800b03f09657477e5a6d956f8c02a6127e42b2446b690a10f2dfa3788bc805"
 baseFee: null
 chainId: "0x0000000000000000000000000000000000000000000000000000000000000539"
-code: "0x6bae02669a47102ee66b165a027754f8d23d7b1033974fd05d04a774f45fe60456cfeb94763d18"
-coinbase: "0xf2e49bbf51b72b5ef90c43e537bf96e4dcde707b"
-difficultyBytes: "0xa926ab27713593f68f1a7a9880ba565352b9efe9bc608ec95cce7824e5684c65"
-gasAvailable: "0x1bb6715e400"
-gasLimit: 4651000000000
-gasUsed: "0x3"
-hardFork: "frontier"
-mixHashOrPrevRandao: "0xfc65006f1fe82e166883c3cc9c339d9b2a105c8d1f14e688bb4d4c33bf25679a"
-number: 3074321974296094531
-receiver: "0x1576968636c85c650ed73dd12b72273969b5269c"
-refunds: {}
-sender: "0xcc5f69eb28a593f7e910f366900cabfef47444a3"
-timestamp: 5291448241446436397
-value: "0x0000000000000000000000000000000000000000000000000000000000000000"
-index: 3
+difficultyBytes: "0x61aedf844d768ef7e9a40eb5340684a113905deae6d87a83f26815314cb98069"
