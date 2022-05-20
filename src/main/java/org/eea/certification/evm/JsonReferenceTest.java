@@ -1,13 +1,14 @@
 package org.eea.certification.evm;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.units.bigints.UInt256;
+
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
 import org.hyperledger.besu.evm.Gas;
-
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonReferenceTest {

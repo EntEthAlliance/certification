@@ -1,15 +1,6 @@
 package org.eea.certification;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.tuweni.eth.EthJsonModule;
-import org.eea.certification.evm.EVMExecutor;
-import org.eea.certification.evm.EVMExecutors;
-import org.eea.certification.evm.EVMOpcodeTestGenerator;
-import org.eea.certification.evm.JsonModule;
-import org.eea.certification.evm.JsonReferenceTest;
-import org.eea.certification.evm.OpcodeTestModel;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -25,6 +16,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.eea.certification.evm.EVMExecutor;
+import org.eea.certification.evm.EVMExecutors;
+import org.eea.certification.evm.EVMOpcodeTestGenerator;
+import org.eea.certification.evm.JsonModule;
+import org.eea.certification.evm.JsonReferenceTest;
+import org.eea.certification.evm.OpcodeTestModel;
+
 /**
  * Entry point of the application.
  */
@@ -38,12 +39,10 @@ public class App {
   }
 
   /**
-   * @param args A set of command line arguments used to run the application
-   *             Arguments are expected to be:
-   *             generate, followed by an optional argument of a path to generate tests. If no path is provided,
-   *             the working directory is used.
-   *             recreate, followed by the path of a yaml file containing a valid test model, and an optional argument
-   *             of a path to generate tests. If no path is provided, the working directory is used.
+   * @param args A set of command line arguments used to run the application Arguments are expected to be: generate,
+   *        followed by an optional argument of a path to generate tests. If no path is provided, the working directory
+   *        is used. recreate, followed by the path of a yaml file containing a valid test model, and an optional
+   *        argument of a path to generate tests. If no path is provided, the working directory is used.
    */
   public static void main(String[] args) {
     if (args.length > 0) {
@@ -77,8 +76,7 @@ public class App {
       System.err.println("Cannot find reference test folder: " + referenceTestsFolder);
       System.exit(1);
     }
-    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {
-    };
+    TypeReference<HashMap<String, JsonReferenceTest>> ref = new TypeReference<>() {};
     List<OpcodeTestModel> referenceTests = new ArrayList<>();
     FileVisitor<Path> visitor = new SimpleFileVisitor<>() {
       @Override

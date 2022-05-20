@@ -1,9 +1,21 @@
 package org.eea.certification.evm;
 
-import com.google.common.collect.ImmutableSetMultimap;
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.bytes.Bytes32;
 import org.apache.tuweni.units.bigints.UInt256;
+
+import java.security.SecureRandom;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
+
+import com.google.common.collect.ImmutableSetMultimap;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Hash;
 import org.hyperledger.besu.datatypes.Wei;
@@ -21,17 +33,6 @@ import org.hyperledger.besu.evm.precompile.PrecompileContractRegistry;
 import org.hyperledger.besu.evm.processor.MessageCallProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.security.SecureRandom;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 /**
  * Generates tests for each EVM opcode execution across every supported hard fork.
@@ -142,7 +143,10 @@ public class EVMOpcodeTestGenerator {
     for (int i = 0; i < 256; i++) {
       Operation operation = registry.get(i);
       if (operation != null) {
-        if ("CALL".equals(operation.getName()) || "CALLCODE".equals(operation.getName()) || "DELEGATECALL".equals(operation.getName()) || "STATICCALL".equals(operation.getName())) {
+        if ("CALL".equals(operation.getName())
+            || "CALLCODE".equals(operation.getName())
+            || "DELEGATECALL".equals(operation.getName())
+            || "STATICCALL".equals(operation.getName())) {
           // for now skip call operations
           continue;
         }
@@ -190,12 +194,40 @@ public class EVMOpcodeTestGenerator {
     worldUpdater.createAccount(receiver, receiverAccount.getNonce(), receiverAccount.getBalance());
     worldUpdater.createAccount(coinbase, coinbaseAccount.getNonce(), coinbaseAccount.getBalance());
 
-    SettableBlockValues blockValues = new SettableBlockValues(UInt256.fromBytes(Bytes32.random(random)), Bytes32.random(), initialGas().toLong() * 5, Math.abs(random.nextLong()), Math.abs(random.nextLong()), Optional.empty());
+    SettableBlockValues blockValues = new SettableBlockValues(
+        UInt256.fromBytes(Bytes32.random(random)),
+        Bytes32.random(),
+        initialGas().toLong() * 5,
+        Math.abs(random.nextLong()),
+        Math.abs(random.nextLong()),
+        Optional.empty());
 
     Wei value = generateWei();
     Gas gasAvailable = initialGas();
-    MessageFrame initialMessageFrame = MessageFrame.builder().type(MessageFrame.Type.MESSAGE_CALL).messageFrameStack(messageFrameStack).worldUpdater(worldUpdater.updater()).initialGas(gasAvailable).contract(Address.ZERO).address(receiver).originator(sender).sender(sender).gasPrice(generateWei()).inputData(generateInputData()).value(value).apparentValue(value).code(code).blockValues(blockValues).depth(0).completer(c -> {
-    }).miningBeneficiary(coinbase).blockHashLookup(h -> null).accessListWarmAddresses(Collections.emptySet()).accessListWarmStorage(ImmutableSetMultimap.of()).build();
+    MessageFrame initialMessageFrame = MessageFrame
+        .builder()
+        .type(MessageFrame.Type.MESSAGE_CALL)
+        .messageFrameStack(messageFrameStack)
+        .worldUpdater(worldUpdater.updater())
+        .initialGas(gasAvailable)
+        .contract(Address.ZERO)
+        .address(receiver)
+        .originator(sender)
+        .sender(sender)
+        .gasPrice(generateWei())
+        .inputData(generateInputData())
+        .value(value)
+        .apparentValue(value)
+        .code(code)
+        .blockValues(blockValues)
+        .depth(0)
+        .completer(c -> {
+        })
+        .miningBeneficiary(coinbase)
+        .blockHashLookup(h -> null)
+        .accessListWarmAddresses(Collections.emptySet())
+        .accessListWarmStorage(ImmutableSetMultimap.of())
+        .build();
     AtomicReference<Optional<Gas>> gasCost = new AtomicReference<>();
     AtomicReference<ExceptionalHaltReason> haltReason = new AtomicReference<>();
     AtomicReference<Operation> currentOperation = new AtomicReference<>();
@@ -253,7 +285,30 @@ public class EVMOpcodeTestGenerator {
       pre.add(receiverAccount);
       Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
-      return new OpcodeTestModel(executor.getHardFork(), pre, operation.getName(), stackAfter, memoryAfter, stackBefore, memoryBefore, initialMessageFrame.getInputData(), initialMessageFrame.getGasPrice(), initialMessageFrame.getLogs(), gasAvailable, gasCost.get(), allGasCost, initialMessageFrame.getRefunds(), haltReason.get(), worldUpdater.getTouchedAccounts(), blockValues, sender, receiver, initialMessageFrame.getValue(), codeBytes, coinbase, UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
+      return new OpcodeTestModel(
+          executor.getHardFork(),
+          pre,
+          operation.getName(),
+          stackAfter,
+          memoryAfter,
+          stackBefore,
+          memoryBefore,
+          initialMessageFrame.getInputData(),
+          initialMessageFrame.getGasPrice(),
+          initialMessageFrame.getLogs(),
+          gasAvailable,
+          gasCost.get(),
+          allGasCost,
+          initialMessageFrame.getRefunds(),
+          haltReason.get(),
+          worldUpdater.getTouchedAccounts(),
+          blockValues,
+          sender,
+          receiver,
+          initialMessageFrame.getValue(),
+          codeBytes,
+          coinbase,
+          UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
     }
 
     // the execution didn't go as far as running the opcode.
@@ -263,7 +318,7 @@ public class EVMOpcodeTestGenerator {
   /**
    * Runs a given test model, with a hard fork of our choosing
    *
-   * @param model    the model to run
+   * @param model the model to run
    * @param hardFork the hard fork to associate with the execution
    * @return a new model execution with the hard fork.
    */
@@ -287,12 +342,40 @@ public class EVMOpcodeTestGenerator {
       worldUpdater.createAccount(acct.getAddress(), acct.getNonce(), acct.getBalance());
     }
 
-    SettableBlockValues blockValues = new SettableBlockValues(model.getDifficultyBytes(), model.getMixHashOrPrevRandao(), model.getGasLimit(), model.getNumber(), model.getTimestamp(), Optional.empty());
+    SettableBlockValues blockValues = new SettableBlockValues(
+        model.getDifficultyBytes(),
+        model.getMixHashOrPrevRandao(),
+        model.getGasLimit(),
+        model.getNumber(),
+        model.getTimestamp(),
+        Optional.empty());
 
     Wei value = model.getValue();
     Gas gasAvailable = model.getGasAvailable();
-    MessageFrame initialMessageFrame = MessageFrame.builder().type(MessageFrame.Type.MESSAGE_CALL).messageFrameStack(messageFrameStack).worldUpdater(worldUpdater.updater()).initialGas(gasAvailable).contract(Address.ZERO).address(receiver).originator(sender).sender(sender).gasPrice(model.getGasPrice()).inputData(model.getInputData()).value(value).apparentValue(value).code(code).blockValues(blockValues).depth(0).completer(c -> {
-    }).miningBeneficiary(coinbase).blockHashLookup(h -> null).accessListWarmAddresses(Collections.emptySet()).accessListWarmStorage(ImmutableSetMultimap.of()).build();
+    MessageFrame initialMessageFrame = MessageFrame
+        .builder()
+        .type(MessageFrame.Type.MESSAGE_CALL)
+        .messageFrameStack(messageFrameStack)
+        .worldUpdater(worldUpdater.updater())
+        .initialGas(gasAvailable)
+        .contract(Address.ZERO)
+        .address(receiver)
+        .originator(sender)
+        .sender(sender)
+        .gasPrice(model.getGasPrice())
+        .inputData(model.getInputData())
+        .value(value)
+        .apparentValue(value)
+        .code(code)
+        .blockValues(blockValues)
+        .depth(0)
+        .completer(c -> {
+        })
+        .miningBeneficiary(coinbase)
+        .blockHashLookup(h -> null)
+        .accessListWarmAddresses(Collections.emptySet())
+        .accessListWarmStorage(ImmutableSetMultimap.of())
+        .build();
     AtomicReference<Optional<Gas>> gasCost = new AtomicReference<>();
 
     messageFrameStack.add(initialMessageFrame);
@@ -313,7 +396,8 @@ public class EVMOpcodeTestGenerator {
     } catch (IllegalStateException e) {
       // do nothing.
     }
-    ExceptionalHaltReason haltReason = initialMessageFrame.getExceptionalHaltReason().orElse(ExceptionalHaltReason.NONE);
+    ExceptionalHaltReason haltReason =
+        initialMessageFrame.getExceptionalHaltReason().orElse(ExceptionalHaltReason.NONE);
 
     // the memory is too large, not a suitable outcome. return null
     if (memoryAfter.size() > 128) {
@@ -322,7 +406,30 @@ public class EVMOpcodeTestGenerator {
 
     Gas allGasCost = gasAvailable.minus(initialMessageFrame.getRemainingGas());
 
-    OpcodeTestModel result = new OpcodeTestModel(executor.getHardFork(), pre, model.getName(), stackAfter, memoryAfter, new ArrayList<>(), new ArrayList<>(), initialMessageFrame.getInputData(), initialMessageFrame.getGasPrice(), initialMessageFrame.getLogs(), gasAvailable, Optional.empty(), allGasCost, initialMessageFrame.getRefunds(), haltReason, worldUpdater.getTouchedAccounts(), blockValues, sender, receiver, value, model.getCode(), coinbase, UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
+    OpcodeTestModel result = new OpcodeTestModel(
+        executor.getHardFork(),
+        pre,
+        model.getName(),
+        stackAfter,
+        memoryAfter,
+        new ArrayList<>(),
+        new ArrayList<>(),
+        initialMessageFrame.getInputData(),
+        initialMessageFrame.getGasPrice(),
+        initialMessageFrame.getLogs(),
+        gasAvailable,
+        Optional.empty(),
+        allGasCost,
+        initialMessageFrame.getRefunds(),
+        haltReason,
+        worldUpdater.getTouchedAccounts(),
+        blockValues,
+        sender,
+        receiver,
+        value,
+        model.getCode(),
+        coinbase,
+        UInt256.valueOf(MainnetEVMs.DEV_NET_CHAIN_ID));
     result.setIndex(model.getIndex());
     return result;
   }
