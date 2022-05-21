@@ -24,6 +24,8 @@ import org.hyperledger.besu.evm.EVM;
 import org.hyperledger.besu.evm.Gas;
 import org.hyperledger.besu.evm.MainnetEVMs;
 import org.hyperledger.besu.evm.account.Account;
+import org.hyperledger.besu.evm.account.EvmAccount;
+import org.hyperledger.besu.evm.fluent.SimpleAccount;
 import org.hyperledger.besu.evm.fluent.SimpleWorld;
 import org.hyperledger.besu.evm.frame.ExceptionalHaltReason;
 import org.hyperledger.besu.evm.frame.MessageFrame;
@@ -339,7 +341,8 @@ public class EVMOpcodeTestGenerator {
     List<Account> pre = new ArrayList<>();
     for (Account acct : model.getBefore().getAccounts()) {
       pre.add(acct);
-      worldUpdater.createAccount(acct.getAddress(), acct.getNonce(), acct.getBalance());
+      EvmAccount created = worldUpdater.createAccount(acct.getAddress(), acct.getNonce(), acct.getBalance());
+      ((SimpleAccount) created).setCode(acct.getCode());
     }
 
     SettableBlockValues blockValues = new SettableBlockValues(
