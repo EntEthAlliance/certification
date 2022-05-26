@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.eea.certification.evm.EVMExecutor;
+import org.eea.certification.evm.EVMExecutorConfiguration;
 import org.eea.certification.evm.EVMExecutors;
 import org.eea.certification.evm.EVMOpcodeTestGenerator;
 import org.eea.certification.evm.JsonModule;
@@ -102,7 +102,7 @@ public class App {
       if (model.getName().contains("loop")) {
         continue;
       }
-      for (Supplier<EVMExecutor> executor : EVMExecutors.registry.values()) {
+      for (Supplier<EVMExecutorConfiguration> executor : EVMExecutors.registry.values()) {
         String hardFork = executor.get().getHardFork();
         Path folder = testsPath.resolve(hardFork);
         folder.toFile().mkdirs();
@@ -140,7 +140,7 @@ public class App {
       System.exit(1);
     }
     testsPath.toFile().mkdirs();
-    for (Supplier<EVMExecutor> executor : EVMExecutors.registry.values()) {
+    for (Supplier<EVMExecutorConfiguration> executor : EVMExecutors.registry.values()) {
       String hardFork = executor.get().getHardFork();
       Path folder = testsPath.resolve(hardFork);
       folder.toFile().mkdirs();

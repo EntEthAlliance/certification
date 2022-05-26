@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
-import org.hyperledger.besu.evm.Gas;
 import org.hyperledger.besu.evm.account.Account;
 import org.hyperledger.besu.evm.fluent.SimpleAccount;
 import org.hyperledger.besu.evm.frame.ExceptionalHaltReason;
@@ -55,18 +54,6 @@ public class JsonModule extends SimpleModule {
       }
       gen.writeEndArray();
       gen.writeEndObject();
-    }
-  }
-
-  static class GasSerializer extends StdSerializer<Gas> {
-
-    GasSerializer() {
-      super(Gas.class);
-    }
-
-    @Override
-    public void serialize(Gas value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-      gen.writeString(value.toHexString());
     }
   }
 
@@ -201,7 +188,6 @@ public class JsonModule extends SimpleModule {
 
   public JsonModule() {
     addSerializer(new AccountSerializer());
-    addSerializer(new GasSerializer());
     addSerializer(new WeiSerializer());
     addSerializer(new BytesSerializer());
     addSerializer(new OptionalSerializer());

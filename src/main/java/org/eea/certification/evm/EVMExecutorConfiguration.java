@@ -4,14 +4,14 @@ import org.hyperledger.besu.evm.EVM;
 import org.hyperledger.besu.evm.operation.OperationRegistry;
 import org.hyperledger.besu.evm.precompile.PrecompileContractRegistry;
 
-public class EVMExecutor {
+public class EVMExecutorConfiguration {
 
   final EVM evm;
   private final PrecompileContractRegistry precompileContractRegistry;
   private final OperationRegistry operationsRegistry;
   private final String hardFork;
 
-  EVMExecutor(
+  EVMExecutorConfiguration(
       String hardFork,
       EVM evm,
       PrecompileContractRegistry precompileContractRegistry,

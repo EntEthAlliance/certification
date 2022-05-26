@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
-import org.hyperledger.besu.evm.Gas;
 import org.hyperledger.besu.evm.MainnetEVMs;
 import org.hyperledger.besu.evm.account.Account;
 import org.hyperledger.besu.evm.fluent.SimpleAccount;
@@ -60,7 +60,7 @@ public class OpcodeTestModel {
   private final String hardFork;
   private final List<Account> accounts;
   private final String name;
-  private final Gas gasUsed;
+  private final long gasUsed;
   private final Object haltReason;
   private final List<Account> post;
   private final Bytes inputData;
@@ -72,8 +72,8 @@ public class OpcodeTestModel {
   private final List<Bytes32> memoryAfter;
   private final BlockValues blockData;
   private final Address coinbase;
-  private final Gas gasAvailable;
-  private final Gas allGasUsed;
+  private final long gasAvailable;
+  private final long allGasUsed;
   private final Map<Address, Wei> refunds;
   private final Address receiver;
   private final UInt256 chainId;
@@ -121,9 +121,9 @@ public class OpcodeTestModel {
         before,
         test.getExec().getData(),
         test.getExec().getGasPrice(),
-        test.getExec().getGas().toHexString(), // gas used by opcode, will be recomputed
-        test.getExec().getGas().toHexString(), // all gas used, will be recomputed
-        test.getGas() == null ? "0x" : test.getGas().toHexString(),
+        Bytes.ofUnsignedLong(test.getExec().getGas()).toHexString(), // gas used by opcode, will be recomputed
+        Bytes.ofUnsignedLong(test.getExec().getGas()).toHexString(), // all gas used, will be recomputed
+        Bytes.ofUnsignedLong(test.getGas()).toHexString(),
         new HashMap<>(),
         ExceptionalHaltReason.NONE,
         test.getEnv().getCurrentDifficulty(),
@@ -248,9 +248,9 @@ public class OpcodeTestModel {
     this.accounts = before.getAccounts();
     this.inputData = inputData;
     this.gasPrice = gasPrice;
-    this.gasAvailable = Gas.fromHexString(gasAvailable);
-    this.gasUsed = Gas.fromHexString(gasUsed);
-    this.allGasUsed = Gas.fromHexString(allGasUsed);
+    this.gasAvailable = Bytes.fromHexStringLenient(gasAvailable).toLong();
+    this.gasUsed = Bytes.fromHexStringLenient(gasUsed).toLong();
+    this.allGasUsed = Bytes.fromHexStringLenient(allGasUsed).toLong();
     this.refunds = refunds;
     this.haltReason = exceptionalHaltReason;
     this.blockData = new SettableBlockValues(
@@ -275,7 +275,6 @@ public class OpcodeTestModel {
     this.name = name;
   }
 
-
   public OpcodeTestModel(
       String hardFork,
       List<Account> accounts,
@@ -287,9 +286,9 @@ public class OpcodeTestModel {
       Bytes inputData,
       Wei gasPrice,
       List<Log> logs,
-      Gas gasAvailable,
-      Optional<Gas> gasUsed,
-      Gas allGasUsed,
+      long gasAvailable,
+      OptionalLong gasUsed,
+      long allGasUsed,
       Map<Address, Wei> refunds,
       ExceptionalHaltReason exceptionalHaltReason,
       Collection<? extends Account> touchedAccounts,
@@ -303,7 +302,7 @@ public class OpcodeTestModel {
     this.accounts = accounts;
     this.name = name;
     this.gasAvailable = gasAvailable;
-    this.gasUsed = gasUsed.orElse(Gas.ZERO);
+    this.gasUsed = gasUsed.orElse(0L);
     this.allGasUsed = allGasUsed;
     this.refunds = refunds;
     this.haltReason = exceptionalHaltReason;
@@ -333,7 +332,7 @@ public class OpcodeTestModel {
     return name;
   }
 
-  public Gas getGasUsed() {
+  public long getGasUsed() {
     return gasUsed;
   }
 
@@ -373,7 +372,7 @@ public class OpcodeTestModel {
     return coinbase;
   }
 
-  public Gas getGasAvailable() {
+  public long getGasAvailable() {
     return gasAvailable;
   }
 
@@ -381,7 +380,7 @@ public class OpcodeTestModel {
     return refunds;
   }
 
-  public Gas getAllGasUsed() {
+  public long getAllGasUsed() {
     return allGasUsed;
   }
 

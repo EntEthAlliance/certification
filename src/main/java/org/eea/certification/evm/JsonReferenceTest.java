@@ -8,7 +8,6 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Wei;
-import org.hyperledger.besu.evm.Gas;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonReferenceTest {
@@ -71,7 +70,7 @@ public class JsonReferenceTest {
     private Wei gasPrice;
     private Address origin;
     private Bytes value;
-    private Gas gas;
+    private long gas;
 
     public Address getAddress() {
       return address;
@@ -129,12 +128,12 @@ public class JsonReferenceTest {
       this.value = value;
     }
 
-    public Gas getGas() {
+    public long getGas() {
       return gas;
     }
 
     public void setGas(String gas) {
-      this.gas = Gas.fromHexString(gas);
+      this.gas = Bytes.fromHexString(gas).toLong();
     }
   }
 
@@ -180,7 +179,7 @@ public class JsonReferenceTest {
 
   private Env env;
   private Exec exec;
-  private Gas gas;
+  private long gas;
   private Bytes logs;
   private Bytes out;
   private Map<Address, JsonAccountState> post;
@@ -202,12 +201,12 @@ public class JsonReferenceTest {
     this.exec = exec;
   }
 
-  public Gas getGas() {
+  public long getGas() {
     return gas;
   }
 
   public void setGas(String gas) {
-    this.gas = Gas.fromHexString(gas);
+    this.gas = Bytes.fromHexString(gas).toLong();
   }
 
   public Bytes getLogs() {
