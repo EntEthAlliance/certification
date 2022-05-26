@@ -1,9 +1,22 @@
 package org.eea.certification.evm;
 
-import com.google.common.collect.ImmutableSetMultimap;
 import org.apache.tuweni.bytes.Bytes;
 import org.apache.tuweni.bytes.Bytes32;
 import org.apache.tuweni.units.bigints.UInt256;
+
+import java.security.SecureRandom;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
+
+import com.google.common.collect.ImmutableSetMultimap;
 import org.hyperledger.besu.datatypes.Address;
 import org.hyperledger.besu.datatypes.Hash;
 import org.hyperledger.besu.datatypes.Wei;
@@ -23,18 +36,6 @@ import org.hyperledger.besu.evm.precompile.PrecompileContractRegistry;
 import org.hyperledger.besu.evm.processor.MessageCallProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.security.SecureRandom;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalLong;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 /**
  * Generates tests for each EVM opcode execution across every supported hard fork.
@@ -137,7 +138,9 @@ public class EVMOpcodeTestGenerator {
     return generateForHardFork(EVMExecutors.paris, numTestsPerOpcode);
   }
 
-  public List<OpcodeTestModel> generateForHardFork(Supplier<EVMExecutorConfiguration> evmExecutor, int numTestsPerOpcode) {
+  public List<OpcodeTestModel> generateForHardFork(
+      Supplier<EVMExecutorConfiguration> evmExecutor,
+      int numTestsPerOpcode) {
     logger.info("Generating for hard fork {}", evmExecutor.get().getHardFork());
     OperationRegistry registry = evmExecutor.get().getOperationsRegistry();
 
@@ -219,7 +222,9 @@ public class EVMOpcodeTestGenerator {
     Wei gasPrice = generateWei();
     Bytes inputData = generateInputData();
     AtomicReference<MessageFrame> initialMessageFrameReference = new AtomicReference<>();
-    EVMExecutor executor = EVMExecutor.evm(evm).gas(gasAvailable)
+    EVMExecutor executor = EVMExecutor
+        .evm(evm)
+        .gas(gasAvailable)
         .worldUpdater(worldUpdater.updater())
         .receiver(receiver)
         .sender(sender)
@@ -230,36 +235,36 @@ public class EVMOpcodeTestGenerator {
         .blockValues(blockValues)
         // .miningBeneficiary(coinbase)
         .accessListWarmAddresses(Collections.emptySet())
-        .accessListWarmStorage(ImmutableSetMultimap.of()).messageCallProcessor(mcp).tracer(
-            (frame, executeOperation) -> {
-              initialMessageFrameReference.compareAndSet(null, frame);
-              if (!executedOpcode.get()) {
-                stackBefore.clear();
-                for (int i = 0; i < frame.stackSize(); i++) {
-                  stackBefore.add(frame.getStackItem(i));
-                }
-                memoryBefore.clear();
-                for (int i = 0; i < frame.memoryWordSize(); i++) {
-                  memoryBefore.add((Bytes32) frame.readMemory(i * 32L, 32L));
-                }
-              }
-
-              currentOperation.set(frame.getCurrentOperation());
-              Operation.OperationResult result = executeOperation.execute();
-              if (executedOpcode.compareAndSet(false, frame.getCurrentOperation().getOpcode() == operation.getOpcode())) {
-                gasCost.set(result.getGasCost());
-                stackAfter.clear();
-                for (int i = 0; i < frame.stackSize(); i++) {
-                  stackAfter.add(frame.getStackItem(i));
-                }
-                for (int i = 0; i < frame.memoryWordSize(); i++) {
-                  memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
-                }
-              }
-              haltReason.set(result.getHaltReason().orElse(ExceptionalHaltReason.NONE));
-
+        .accessListWarmStorage(ImmutableSetMultimap.of())
+        .messageCallProcessor(mcp)
+        .tracer((frame, executeOperation) -> {
+          initialMessageFrameReference.compareAndSet(null, frame);
+          if (!executedOpcode.get()) {
+            stackBefore.clear();
+            for (int i = 0; i < frame.stackSize(); i++) {
+              stackBefore.add(frame.getStackItem(i));
             }
-        );
+            memoryBefore.clear();
+            for (int i = 0; i < frame.memoryWordSize(); i++) {
+              memoryBefore.add((Bytes32) frame.readMemory(i * 32L, 32L));
+            }
+          }
+
+          currentOperation.set(frame.getCurrentOperation());
+          Operation.OperationResult result = executeOperation.execute();
+          if (executedOpcode.compareAndSet(false, frame.getCurrentOperation().getOpcode() == operation.getOpcode())) {
+            gasCost.set(result.getGasCost());
+            stackAfter.clear();
+            for (int i = 0; i < frame.stackSize(); i++) {
+              stackAfter.add(frame.getStackItem(i));
+            }
+            for (int i = 0; i < frame.memoryWordSize(); i++) {
+              memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
+            }
+          }
+          haltReason.set(result.getHaltReason().orElse(ExceptionalHaltReason.NONE));
+
+        });
     Bytes output = executor.execute();
 
     // the memory is too large, not a suitable outcome. return null
@@ -287,7 +292,8 @@ public class EVMOpcodeTestGenerator {
           memoryAfter,
           stackBefore,
           memoryBefore,
-          inputData, gasPrice,
+          inputData,
+          gasPrice,
           initialMessageFrame.getLogs(),
           gasAvailable,
           gasCost.get(),
@@ -311,7 +317,7 @@ public class EVMOpcodeTestGenerator {
   /**
    * Runs a given test model, with a hard fork of our choosing
    *
-   * @param model    the model to run
+   * @param model the model to run
    * @param hardFork the hard fork to associate with the execution
    * @return a new model execution with the hard fork.
    */
@@ -352,7 +358,9 @@ public class EVMOpcodeTestGenerator {
     List<Bytes32> memoryAfter = new ArrayList<>();
 
     AtomicReference<MessageFrame> initialMessageFrameReference = new AtomicReference<>();
-    EVMExecutor executor = EVMExecutor.evm(evm).gas(gasAvailable)
+    EVMExecutor executor = EVMExecutor
+        .evm(evm)
+        .gas(gasAvailable)
         .worldUpdater(worldUpdater)
         .receiver(receiver)
         .sender(sender)
@@ -367,19 +375,18 @@ public class EVMOpcodeTestGenerator {
         .precompileContractRegistry(precompileContractRegistry)
         .messageCallProcessor(mcp)
         .tracer((frame, executeOperation) -> {
-              initialMessageFrameReference.compareAndSet(null, frame);
+          initialMessageFrameReference.compareAndSet(null, frame);
 
-              Operation.OperationResult result = executeOperation.execute();
-              gasCost.set(result.getGasCost());
-              stackAfter.clear();
-              for (int i = 0; i < frame.stackSize(); i++) {
-                stackAfter.add(frame.getStackItem(i));
-              }
-              for (int i = 0; i < frame.memoryWordSize(); i++) {
-                memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
-              }
-            }
-        );
+          Operation.OperationResult result = executeOperation.execute();
+          gasCost.set(result.getGasCost());
+          stackAfter.clear();
+          for (int i = 0; i < frame.stackSize(); i++) {
+            stackAfter.add(frame.getStackItem(i));
+          }
+          for (int i = 0; i < frame.memoryWordSize(); i++) {
+            memoryAfter.add((Bytes32) frame.readMemory(i * 32L, 32L));
+          }
+        });
     Bytes output = executor.execute();
 
 
